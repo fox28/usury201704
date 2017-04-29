@@ -7,7 +7,9 @@
     <color name="menu_item_normal">#6A7077</color>
     <color name="menu_item_pressed">#FF7A49</color>
     <color name="menu_item_selected">#FF7A49</color>
-
     <color name="windows_color">#F5F5F5</color>
-
+    <color name="fragment_bg">#EFEFEF</color>
+    <color name="white">#ffffff</color>
+    <color name="gray">#969292</color>
+    <color name="black">#000000</color>
 </resources>
