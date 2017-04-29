@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 
 import cn.kkk.usury.R;
-import cn.kkk.usury.view.MainActivity;
+import cn.kkk.usury.view.activity.MainActivity;
 
 
 /**
