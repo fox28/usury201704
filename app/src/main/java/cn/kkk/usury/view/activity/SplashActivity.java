@@ -1,4 +1,4 @@
-package cn.kkk.usury.view;
+package cn.kkk.usury.view.activity;
 
 import android.app.Activity;
 import android.os.Bundle;
