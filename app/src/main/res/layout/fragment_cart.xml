@@ -11,6 +11,7 @@
         android:text="速贷超市界面"
         android:textSize="22sp"
         />
-
+    <!--顶部title、include-->
+    <!--今日产品列表：RecyclerView-->
 
 </FrameLayout>
