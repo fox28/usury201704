@@ -120,11 +120,29 @@
                     />
             </RelativeLayout>
             <!--8张图片GridView-->
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/RV_LoanSortPicture"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </android.support.v7.widget.RecyclerView>
+
             <!--速贷推荐CardView--> 
+            <android.support.v7.widget.RecyclerView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+            </android.support.v7.widget.RecyclerView>
             <!--速贷攻略 RecyclerView、列表项为3-->
              <!--速贷攻略ImageView-->
+            <!--活动ing 数量=3-->
              <!--新上线产品RecyclerView-->
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/RV_NewGoods"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
+            </android.support.v7.widget.RecyclerView>
         </LinearLayout>
     </android.support.v4.widget.SwipeRefreshLayout>
 
