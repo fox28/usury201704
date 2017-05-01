@@ -6,233 +6,260 @@
               android:orientation="vertical"
               android:background="@color/fragment_bg"
     >
-    <android.support.v4.widget.SwipeRefreshLayout
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <ScrollView
+        android:layout_height="wrap_content">
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
+            <!-- 轮播图 -->
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:src="@drawable/temp_slideshow"
+                />
+            <!--贷款人身份、点击跳转到速贷超市界面-->
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
                 >
-                <!-- 轮播图 -->
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:padding="10sp"
+                    >
+
+                    <ImageView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/temp_avatar"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="自由职业"
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:padding="10sp"
+                    >
+
+                    <ImageView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/temp_avatar"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="生意人"
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:padding="10sp"
+                    >
+
+                    <ImageView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/temp_avatar"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="上班族"
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:padding="10sp"
+                    >
+
+                    <ImageView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/temp_avatar"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="学生党"
+                        />
+                </LinearLayout>
+            </LinearLayout>
+            <!--滚动信息-->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="50sp"
+                android:layout_marginTop="8sp"
+                >
+
                 <ImageView
                     android:layout_width="match_parent"
-                    android:layout_height="80dp"
-                    android:src="@drawable/temp_slideshow"
-                    android:visibility="gone"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/temp_news"
                     />
-                <!--贷款人身份、点击跳转到速贷超市界面-->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    >
-                    <LinearLayout
-                        android:orientation="vertical"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:padding="10sp"
-                        >
-                        <ImageView
+            </RelativeLayout>
 
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/temp_avatar"
-                            />
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="自由职业"
-                            android:layout_gravity="center"
-                            />
-                    </LinearLayout>
-                    <LinearLayout
-                        android:orientation="vertical"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:padding="10sp"
-                        >
-                        <ImageView
+            <!--8张图片GridView-->
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/RV_LoanSortPicture"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                >
 
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/temp_avatar"
-                            />
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="生意人"
-                            android:layout_gravity="center"
-                            />
-                    </LinearLayout>
-                    <LinearLayout
-                        android:orientation="vertical"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:padding="10sp"
-                        >
-                        <ImageView
+            </android.support.v7.widget.RecyclerView>
 
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/temp_avatar"
-                            />
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="上班族"
-                            android:layout_gravity="center"
-                            />
-                    </LinearLayout>
-                    <LinearLayout
-                        android:orientation="vertical"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:padding="10sp"
-                        >
-                        <ImageView
+            <!--速贷推荐CardView--> 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="1dp"
+                android:background="@color/fragment_bg"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp"
 
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/temp_avatar"
-                            />
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="学生党"
-                            android:layout_gravity="center"
-                            />
-                    </LinearLayout>
-                </LinearLayout>
-                <!--滚动信息-->
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="50sp"
-                    android:layout_marginTop="8sp"
-                    >
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/temp_news"
-                        android:visibility="gone"
-                        />
-                </RelativeLayout>
-                <!--8张图片GridView-->
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/RV_LoanSortPicture"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/white"
-                    >
-
-                </android.support.v7.widget.RecyclerView>
-
-                <!--速贷推荐CardView--> 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:layout_marginTop="1dp"
-                    android:paddingTop="10dp"
-                    android:paddingBottom="10dp"
-                    android:background="@color/fragment_bg"
-                    android:gravity="center"
-                    android:orientation="horizontal"
-
-                    >
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
-                        android:src="@drawable/center_card_coupon1"/>
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:layout_marginLeft="5dp"
-                        android:text="速贷推荐"
-                        android:textColor="@color/black"
-                        android:textSize="15sp"
-                        />
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="10dp"
-                        android:src="@drawable/right_arrow_icon"
-                        android:visibility="gone"
-                        />
-                </LinearLayout>
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/RV_fastRecommend"
+                >
+                <ImageView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-
-                </android.support.v7.widget.RecyclerView>
-
-                <!--速贷攻略 RecyclerView、列表项为3-->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:layout_marginTop="1dp"
-                    android:paddingTop="10dp"
-                    android:paddingBottom="10dp"
-                    android:background="@color/fragment_bg"
-                    android:gravity="center"
-                    android:orientation="horizontal"
-
-                    >
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
-                        android:src="@drawable/center_card_coupon1"/>
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:layout_marginLeft="5dp"
-                        android:text="速贷攻略"
-                        android:textColor="@color/black"
-                        android:textSize="15sp"
-                        />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="更多"
-                        />
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="10dp"
-                        android:src="@drawable/right_arrow_icon"
-                        />
-                </LinearLayout>
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/RV_fastStrategy"
-                    android:layout_width="wrap_content"
-                    android:layout_height="60dp">
-
-                </android.support.v7.widget.RecyclerView>
-
-                 <!--速贷攻略ImageView-->
-                <!--活动ing 数量=3-->
-                 <!--新上线产品RecyclerView-->
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/RV_NewGoods"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                </android.support.v7.widget.RecyclerView>
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:src="@drawable/center_card_coupon1"/>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_weight="1"
+                    android:text="速贷推荐"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+                    />
             </LinearLayout>
-        </ScrollView>
-    </android.support.v4.widget.SwipeRefreshLayout>
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/RV_fastRecommend"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+            </android.support.v7.widget.RecyclerView>
 
+            <!--速贷攻略 RecyclerView、列表项为3-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="1dp"
+                android:background="@color/fragment_bg"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp"
+                >
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:src="@drawable/center_card_coupon1"/>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_weight="1"
+                    android:text="速贷攻略"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="更多"
+                    />
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:src="@drawable/right_arrow_icon"
+                    />
+            </LinearLayout>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/RV_fastStrategy"
+                android:layout_width="wrap_content"
+                android:layout_height="60dp">
+            </android.support.v7.widget.RecyclerView>
+
+
+            <!--速贷攻略ImageView-->
+            <!--活动ing 数量=3-->
+            <!--新上线产品RecyclerView-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:orientation="horizontal"
+                android:layout_marginTop="1dp"
+                android:background="@color/fragment_bg"
+                android:gravity="center_vertical"
+                >
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="10dp"
+                    android:paddingTop="10dp"
+                    android:layout_marginLeft="5dp"
+                    android:src="@drawable/center_card_coupon1"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="新产品上线"
+                    android:textSize="15sp"
+                    android:textColor="@color/black"
+                    android:layout_marginLeft="5dp"
+                    />
+
+            </LinearLayout>
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/RV_NewGoods"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            </android.support.v7.widget.RecyclerView>
+
+        </LinearLayout>
+    </ScrollView>
 
 
 </LinearLayout>

@@ -4,6 +4,7 @@ package cn.kkk.usury.view.fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
@@ -14,20 +15,23 @@ import java.util.ArrayList;
 
 import cn.kkk.usury.R;
 import cn.kkk.usury.adapter.FastLoanAdapter;
+import cn.kkk.usury.adapter.NewGoodsAdapter;
 import cn.kkk.usury.adapter.SortPicAdapter;
 import cn.kkk.usury.model.bean.AppBean;
+import cn.kkk.usury.model.dao.AppDao;
 
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class HomeFragment extends Fragment {
-    RecyclerView mRV_SortPic, mRV_fastRecommend, mRV_fastStrategy;
+    RecyclerView mRV_SortPic, mRV_fastRecommend, mRV_fastStrategy, mRV_NewGoods;
     StaggeredGridLayoutManager manager;
+    LinearLayoutManager linearManager;
     SortPicAdapter mSortPicAdapter;
     FastLoanAdapter mFastLoanAdapter;
-    ArrayList<AppBean> mArrayListSortPic;
-
+    NewGoodsAdapter mNewGoodsAdapter;
+    ArrayList<AppBean> mArrayList;
 
 
     public HomeFragment() {
@@ -54,14 +58,14 @@ public class HomeFragment extends Fragment {
         manager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
         mRV_SortPic.setLayoutManager(manager);
         mRV_SortPic.setHasFixedSize(true);
-        mSortPicAdapter = new SortPicAdapter(getContext(), mArrayListSortPic);
+        mSortPicAdapter = new SortPicAdapter(getContext(), mArrayList);
         mRV_SortPic.setAdapter(mSortPicAdapter);
 
         // 速贷推荐
         manager = new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.HORIZONTAL);
         mRV_fastRecommend.setLayoutManager(manager);
         mRV_SortPic.setHasFixedSize(true);
-        mFastLoanAdapter = new FastLoanAdapter(getContext(), mArrayListSortPic);
+        mFastLoanAdapter = new FastLoanAdapter(getContext(), mArrayList);
         mRV_fastRecommend.setAdapter(mFastLoanAdapter);
 
         // 速贷攻略
@@ -69,24 +73,26 @@ public class HomeFragment extends Fragment {
         mRV_fastStrategy.setLayoutManager(manager);
         mRV_fastStrategy.setHasFixedSize(true);
 
+
+        // 新产品上线
+        linearManager = new LinearLayoutManager(getContext());
+        mRV_NewGoods.setLayoutManager(linearManager);
+        mRV_NewGoods.setHasFixedSize(true);
+        mNewGoodsAdapter = new NewGoodsAdapter(getContext(), mArrayList);
+        mRV_NewGoods.setAdapter(mNewGoodsAdapter);
+
+
     }
 
     private void initView(View view) {
         mRV_SortPic = (RecyclerView) view.findViewById(R.id.RV_LoanSortPicture);
         mRV_fastRecommend = (RecyclerView) view.findViewById(R.id.RV_fastRecommend);
         mRV_fastStrategy = (RecyclerView) view.findViewById(R.id.RV_fastStrategy);
+        mRV_NewGoods = (RecyclerView) view.findViewById(R.id.RV_NewGoods);
     }
 
     private void initData() {
-        mArrayListSortPic = new ArrayList<>();
-        int[] photoIs = {
-                R.drawable.baidu_safe, R.drawable.baidu_safe, R.drawable.baidu_safe,
-                R.drawable.baidu_safe, R.drawable.baidu_safe, R.drawable.baidu_safe
-        };
-        for(int i=0;i<photoIs.length;i++) {
-            AppBean app = new AppBean( photoIs[i]);
-            app.setName("叮当贷");
-            mArrayListSortPic.add(app);
-        }
+        mArrayList = AppDao.getData(getContext());
+
     }
 }
