@@ -10,7 +10,7 @@ import android.widget.ImageView;
 import java.util.ArrayList;
 
 import cn.kkk.usury.R;
-import cn.kkk.usury.model.bean.SortPicBean;
+import cn.kkk.usury.model.bean.AppBean;
 
 /**
  * Created by apple on 2017/4/30.
@@ -18,25 +18,25 @@ import cn.kkk.usury.model.bean.SortPicBean;
 
 public class SortPicAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     Context context;
-    ArrayList<SortPicBean> arrayLlist;
+    ArrayList<AppBean> arrayList;
 
-    public SortPicAdapter(Context context, ArrayList arrayLlist) {
+    public SortPicAdapter(Context context, ArrayList arrayList) {
         this.context = context;
-        this.arrayLlist = arrayLlist;
+        this.arrayList = arrayList;
     }
 
     @Override
     public AppViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 //            View view = View.inflate(context, R.layout.app_item, null);
         LayoutInflater inflater = LayoutInflater.from(context);
-        View view = inflater.inflate(R.layout.sort_pic_item, null);
+        View view = inflater.inflate(R.layout.item_sort_pic, null);
 
         return new AppViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder parentHolder, int position) {
-        SortPicBean bean = arrayLlist.get(position);
+        AppBean bean = arrayList.get(position);
         AppViewHolder holder = (AppViewHolder) parentHolder;
         holder.ivSortPic.setImageResource(bean.getPhotoId());
 
@@ -46,7 +46,7 @@ public class SortPicAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
     @Override
     public int getItemCount() {
-        return arrayLlist!=null?arrayLlist.size():0;
+        return arrayList !=null? arrayList.size():0;
     }
 
     class AppViewHolder extends RecyclerView.ViewHolder {

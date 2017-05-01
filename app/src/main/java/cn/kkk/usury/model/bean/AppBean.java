@@ -3,7 +3,7 @@ package cn.kkk.usury.model.bean;
 /**
  * Created by yao on 2015/11/10.
  */
-public class SortPicBean {
+public class AppBean {
     private String name;
     private String version;
     private int photoId;
@@ -50,10 +50,10 @@ public class SortPicBean {
         this.intro = intro;
     }
 
-    public SortPicBean() {
+    public AppBean() {
     }
 
-    public SortPicBean(String name, String version, int photoId, int fileSize, String intro) {
+    public AppBean(String name, String version, int photoId, int fileSize, String intro) {
         this.name = name;
         this.version = version;
         this.photoId = photoId;
@@ -61,13 +61,13 @@ public class SortPicBean {
         this.intro = intro;
     }
 
-    public SortPicBean(int photoId) {
+    public AppBean(int photoId) {
         this.photoId = photoId;
     }
 
     @Override
     public String toString() {
-        return "SortPicBean{" +
+        return "AppBean{" +
                 "name='" + name + '\'' +
                 ", version='" + version + '\'' +
                 ", photoId=" + photoId +
