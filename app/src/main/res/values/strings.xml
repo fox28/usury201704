@@ -1,6 +1,7 @@
 <resources>
-    <string name="app_name">AppName29</string>
+    <string name="app_name">AppName01</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="temp_name">临时名称</string>
 </resources>
