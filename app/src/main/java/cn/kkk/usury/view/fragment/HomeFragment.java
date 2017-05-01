@@ -13,18 +13,22 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 
 import cn.kkk.usury.R;
+import cn.kkk.usury.adapter.FastLoanAdapter;
 import cn.kkk.usury.adapter.SortPicAdapter;
-import cn.kkk.usury.model.bean.SortPicBean;
+import cn.kkk.usury.model.bean.AppBean;
 
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class HomeFragment extends Fragment {
-    RecyclerView mRV_SortPic;
-    StaggeredGridLayoutManager layoutManager;
+    RecyclerView mRV_SortPic, mRV_fastRecommend, mRV_fastStrategy;
+    StaggeredGridLayoutManager manager;
     SortPicAdapter mSortPicAdapter;
-    ArrayList<SortPicBean> mArrayListSortPic;
+    FastLoanAdapter mFastLoanAdapter;
+    ArrayList<AppBean> mArrayListSortPic;
+
+
 
     public HomeFragment() {
     }
@@ -45,17 +49,32 @@ public class HomeFragment extends Fragment {
 
 
         initData();
-        layoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
-        mRV_SortPic.setLayoutManager(layoutManager);
+
+        // 8张分类图片
+        manager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
+        mRV_SortPic.setLayoutManager(manager);
         mRV_SortPic.setHasFixedSize(true);
         mSortPicAdapter = new SortPicAdapter(getContext(), mArrayListSortPic);
         mRV_SortPic.setAdapter(mSortPicAdapter);
 
+        // 速贷推荐
+        manager = new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.HORIZONTAL);
+        mRV_fastRecommend.setLayoutManager(manager);
+        mRV_SortPic.setHasFixedSize(true);
+        mFastLoanAdapter = new FastLoanAdapter(getContext(), mArrayListSortPic);
+        mRV_fastRecommend.setAdapter(mFastLoanAdapter);
+
+        // 速贷攻略
+        manager = new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL);
+        mRV_fastStrategy.setLayoutManager(manager);
+        mRV_fastStrategy.setHasFixedSize(true);
 
     }
 
     private void initView(View view) {
         mRV_SortPic = (RecyclerView) view.findViewById(R.id.RV_LoanSortPicture);
+        mRV_fastRecommend = (RecyclerView) view.findViewById(R.id.RV_fastRecommend);
+        mRV_fastStrategy = (RecyclerView) view.findViewById(R.id.RV_fastStrategy);
     }
 
     private void initData() {
@@ -65,7 +84,8 @@ public class HomeFragment extends Fragment {
                 R.drawable.baidu_safe, R.drawable.baidu_safe, R.drawable.baidu_safe
         };
         for(int i=0;i<photoIs.length;i++) {
-            SortPicBean app = new SortPicBean( photoIs[i]);
+            AppBean app = new AppBean( photoIs[i]);
+            app.setName("叮当贷");
             mArrayListSortPic.add(app);
         }
     }
