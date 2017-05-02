@@ -14,7 +14,7 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import cn.kkk.usury.R;
 import cn.kkk.usury.utils.L;
-import cn.kkk.usury.view.fragment.CartFragment;
+import cn.kkk.usury.view.fragment.MarketFragment;
 import cn.kkk.usury.view.fragment.HomeFragment;
 import cn.kkk.usury.view.fragment.PersonalCenterFragment;
 
@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
     RadioButton[] mRadioButtons;
     Fragment[] mFragments;
     HomeFragment mHomeFragment;
-    CartFragment mCartFragment;
+    MarketFragment mMarketFragment;
     PersonalCenterFragment mPersonalCenterFragment;
 
 
@@ -58,17 +58,17 @@ public class MainActivity extends AppCompatActivity {
     private void initFragment() {
         mFragments = new Fragment[3];
         mHomeFragment = new HomeFragment();
-        mCartFragment = new CartFragment();
+        mMarketFragment = new MarketFragment();
         mPersonalCenterFragment= new PersonalCenterFragment();
         mFragments[0] = mHomeFragment;
-        mFragments[1] = mCartFragment;
+        mFragments[1] = mMarketFragment;
         mFragments[2] = mPersonalCenterFragment;
         getSupportFragmentManager().beginTransaction()
                 .add(R.id.fragment_container,mPersonalCenterFragment)
                 .add(R.id.fragment_container, mHomeFragment)
-                .add(R.id.fragment_container, mCartFragment)
+                .add(R.id.fragment_container, mMarketFragment)
                 .show(mHomeFragment)
-                .hide(mPersonalCenterFragment).hide(mCartFragment)
+                .hide(mPersonalCenterFragment).hide(mMarketFragment)
                 .commit();
     }
 
