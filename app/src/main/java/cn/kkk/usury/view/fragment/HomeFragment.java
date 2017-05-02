@@ -14,7 +14,8 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 
 import cn.kkk.usury.R;
-import cn.kkk.usury.adapter.FastLoanAdapter;
+import cn.kkk.usury.adapter.FastRecommendAdapter;
+import cn.kkk.usury.adapter.FastStrategyAdapter;
 import cn.kkk.usury.adapter.NewGoodsAdapter;
 import cn.kkk.usury.adapter.SortPicAdapter;
 import cn.kkk.usury.model.bean.AppBean;
@@ -29,7 +30,8 @@ public class HomeFragment extends Fragment {
     StaggeredGridLayoutManager manager;
     LinearLayoutManager linearManager;
     SortPicAdapter mSortPicAdapter;
-    FastLoanAdapter mFastLoanAdapter;
+    FastRecommendAdapter mFastRecommendAdapter;
+    FastStrategyAdapter mFastStrategyAdapter;
     NewGoodsAdapter mNewGoodsAdapter;
     ArrayList<AppBean> mArrayList;
 
@@ -65,13 +67,15 @@ public class HomeFragment extends Fragment {
         manager = new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.HORIZONTAL);
         mRV_fastRecommend.setLayoutManager(manager);
         mRV_SortPic.setHasFixedSize(true);
-        mFastLoanAdapter = new FastLoanAdapter(getContext(), mArrayList);
-        mRV_fastRecommend.setAdapter(mFastLoanAdapter);
+        mFastRecommendAdapter = new FastRecommendAdapter(getContext(), mArrayList);
+        mRV_fastRecommend.setAdapter(mFastRecommendAdapter);
 
         // 速贷攻略
         manager = new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL);
         mRV_fastStrategy.setLayoutManager(manager);
         mRV_fastStrategy.setHasFixedSize(true);
+        mFastStrategyAdapter = new FastStrategyAdapter(getContext(), mArrayList);
+        mRV_fastStrategy.setAdapter(mFastStrategyAdapter);
 
 
         // 新产品上线

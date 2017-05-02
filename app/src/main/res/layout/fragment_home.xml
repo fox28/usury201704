@@ -220,12 +220,18 @@
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/RV_fastStrategy"
-                    android:layout_width="wrap_content"
-                    android:layout_height="60dp">
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
                 </android.support.v7.widget.RecyclerView>
-
-
                 <!--速贷攻略ImageView-->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:text="速贷攻略图"
+                    android:textColor="@color/red"
+                    android:gravity="center"
+                    android:background="@color/yellow"
+                    />
                 <!--活动ing 数量=3-->
                 <!--新上线产品RecyclerView-->
                 <LinearLayout
