@@ -233,6 +233,49 @@
                     android:background="@color/yellow"
                     />
                 <!--活动ing 数量=3-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="1dp"
+                    android:background="@color/fragment_bg"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:paddingBottom="10dp"
+                    android:paddingTop="10dp"
+                    >
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:src="@drawable/center_card_coupon1"/>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_weight="1"
+                        android:text="优惠活动"
+                        android:textColor="@color/black"
+                        android:textSize="15sp"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="查看全部活动"
+                        />
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="10dp"
+                        android:src="@drawable/right_arrow_icon"
+                        />
+                </LinearLayout>
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/RV_specialOffers"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    >
+                </android.support.v7.widget.RecyclerView>
+
                 <!--新上线产品RecyclerView-->
                 <LinearLayout
                     android:layout_width="match_parent"

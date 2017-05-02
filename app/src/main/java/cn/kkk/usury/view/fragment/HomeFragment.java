@@ -18,6 +18,7 @@ import cn.kkk.usury.adapter.FastRecommendAdapter;
 import cn.kkk.usury.adapter.FastStrategyAdapter;
 import cn.kkk.usury.adapter.NewGoodsAdapter;
 import cn.kkk.usury.adapter.SortPicAdapter;
+import cn.kkk.usury.adapter.SpecialOffersAdapter;
 import cn.kkk.usury.model.bean.AppBean;
 import cn.kkk.usury.model.dao.AppDao;
 
@@ -26,12 +27,13 @@ import cn.kkk.usury.model.dao.AppDao;
  * A simple {@link Fragment} subclass.
  */
 public class HomeFragment extends Fragment {
-    RecyclerView mRV_SortPic, mRV_fastRecommend, mRV_fastStrategy, mRV_NewGoods;
+    RecyclerView mRV_SortPic, mRV_fastRecommend, mRV_fastStrategy, mRV_SpecialOffers, mRV_NewGoods;
     StaggeredGridLayoutManager manager;
     LinearLayoutManager linearManager;
     SortPicAdapter mSortPicAdapter;
     FastRecommendAdapter mFastRecommendAdapter;
     FastStrategyAdapter mFastStrategyAdapter;
+    SpecialOffersAdapter mSpecialOffersAdapter;
     NewGoodsAdapter mNewGoodsAdapter;
     ArrayList<AppBean> mArrayList;
 
@@ -77,6 +79,12 @@ public class HomeFragment extends Fragment {
         mFastStrategyAdapter = new FastStrategyAdapter(getContext(), mArrayList);
         mRV_fastStrategy.setAdapter(mFastStrategyAdapter);
 
+        // 优惠活动
+        linearManager = new LinearLayoutManager(getContext());
+        mRV_SpecialOffers.setLayoutManager(linearManager);
+        mRV_SpecialOffers.setHasFixedSize(true);
+        mSpecialOffersAdapter = new SpecialOffersAdapter(getContext(), mArrayList);
+        mRV_SpecialOffers.setAdapter(mSpecialOffersAdapter);
 
         // 新产品上线
         linearManager = new LinearLayoutManager(getContext());
@@ -92,6 +100,7 @@ public class HomeFragment extends Fragment {
         mRV_SortPic = (RecyclerView) view.findViewById(R.id.RV_LoanSortPicture);
         mRV_fastRecommend = (RecyclerView) view.findViewById(R.id.RV_fastRecommend);
         mRV_fastStrategy = (RecyclerView) view.findViewById(R.id.RV_fastStrategy);
+        mRV_SpecialOffers = (RecyclerView) view.findViewById(R.id.RV_specialOffers);
         mRV_NewGoods = (RecyclerView) view.findViewById(R.id.RV_NewGoods);
     }
 
