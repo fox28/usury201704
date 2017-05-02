@@ -17,11 +17,11 @@ import cn.kkk.usury.model.bean.AppBean;
  * Created by apple on 2017/4/30.
  */
 
-public class FastLoanAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class FastRecommendAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     Context context;
     ArrayList<AppBean> arrayList;
 
-    public FastLoanAdapter(Context context, ArrayList arrayList) {
+    public FastRecommendAdapter(Context context, ArrayList arrayList) {
         this.context = context;
         this.arrayList = arrayList;
     }
