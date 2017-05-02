@@ -35,6 +35,7 @@ public class MarketAppAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         ItemMarketHolder holder = (ItemMarketHolder) parentHolder;
         AppBean bean = arrayList.get(position);
         holder.tvAppInfo.setText(bean.getIntro());
+        holder.tvAppName.setText(bean.getName());
     }
 
     @Override
@@ -43,10 +44,11 @@ public class MarketAppAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     }
 
     class ItemMarketHolder extends RecyclerView.ViewHolder {
-        TextView tvAppInfo;
+        TextView tvAppInfo, tvAppName;
         public ItemMarketHolder(View itemView) {
             super(itemView);
             tvAppInfo = (TextView) itemView.findViewById(R.id.tv_market_appInfo);
+            tvAppName = (TextView) itemView.findViewById(R.id.tv_appName_market);
         }
     }
 
