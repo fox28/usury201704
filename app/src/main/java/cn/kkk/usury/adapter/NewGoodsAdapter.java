@@ -42,7 +42,7 @@ public class NewGoodsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     @Override
     public int getItemCount() {
-        return arrayList!=null?arrayList.size():0;
+        return arrayList!=null?(arrayList.size()>6?6:arrayList.size()):0;
     }
 
     class NewGoodsViewHolder extends RecyclerView.ViewHolder {

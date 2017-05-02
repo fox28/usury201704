@@ -46,7 +46,7 @@ public class SortPicAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
     @Override
     public int getItemCount() {
-        return arrayList !=null? arrayList.size():0;
+        return arrayList !=null? (arrayList.size()>8?8:arrayList.size()):0;
     }
 
     class SortPicViewHolder extends RecyclerView.ViewHolder {
