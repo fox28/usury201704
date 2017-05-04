@@ -21,6 +21,8 @@ import cn.kkk.usury.adapter.SortPicAdapter;
 import cn.kkk.usury.adapter.SpecialOffersAdapter;
 import cn.kkk.usury.model.bean.AppBean;
 import cn.kkk.usury.model.dao.AppDao;
+import cn.kkk.usury.view.widget.FlowIndicator;
+import cn.kkk.usury.view.widget.SlideLoopView;
 
 
 /**
@@ -36,6 +38,10 @@ public class HomeFragment extends Fragment {
     SpecialOffersAdapter mSpecialOffersAdapter;
     NewGoodsAdapter mNewGoodsAdapter;
     ArrayList<AppBean> mArrayList;
+
+    SlideLoopView mSlideLoopView;
+    FlowIndicator mFlowIndicator;
+    ArrayList<String> mSlideList;
 
 
     public HomeFragment() {
@@ -57,6 +63,9 @@ public class HomeFragment extends Fragment {
 
 
         initData();
+
+        // 轮播图
+        mSlideLoopView.startPlay(getContext(),mFlowIndicator,mSlideList);
 
         // 8张分类图片
         manager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
@@ -102,10 +111,20 @@ public class HomeFragment extends Fragment {
         mRV_fastStrategy = (RecyclerView) view.findViewById(R.id.RV_fastStrategy);
         mRV_SpecialOffers = (RecyclerView) view.findViewById(R.id.RV_specialOffers);
         mRV_NewGoods = (RecyclerView) view.findViewById(R.id.RV_NewGoods);
+
+        mSlideLoopView = (SlideLoopView) view.findViewById(R.id.slv_homeFragment);
+        mFlowIndicator = (FlowIndicator) view.findViewById(R.id.flowIndicator_homeFragment);
     }
 
     private void initData() {
         mArrayList = AppDao.getData(getContext());
+
+        mSlideList = new ArrayList<>();
+        mSlideList.add("goods01.png");
+        mSlideList.add("goods02.png");
+        mSlideList.add("goods03.png");
+        mSlideList.add("goods04.png");
+        mSlideList.add("goods05.png");
 
     }
 }
