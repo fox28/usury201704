@@ -57,17 +57,29 @@
                     android:text="强势登陆XXXX"
                     />
             </LinearLayout>
-            <!--
-            <ListView
-                android:id="@+id/LV_textLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-            </ListView>
-            -->
-            <TextView
+
+            <!--<HorizontalScrollView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="0dp"-->
+                <!--android:layout_weight="1"-->
+                <!--&gt;-->
+                <!--<LinearLayout-->
+                    <!--android:orientation="horizontal"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content">-->
+                    <!--<ListView-->
+                        <!--android:id="@+id/lv_newGoods"-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content">-->
+                    <!--</ListView>-->
+                <!--</LinearLayout>-->
+            <!--</HorizontalScrollView>-->
+            <GridView
+                android:id="@+id/gv_newGoods"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:layout_weight="1"
+                android:numColumns="5"
                 android:text="一分钟申请，最高额度10万"
                 />
             <TextView
