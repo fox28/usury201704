@@ -40,7 +40,6 @@
         <item>10.1.5</item>
         <item>5.1.5</item>
         <item>8.4.0</item>
-
     </string-array>
 
     <string-array name="intro">
@@ -55,6 +54,6 @@
         <item>AVG是能够让你的智能手机面授恶意软件、手机病毒和垃圾爹娘的侵袭。</item>
         <item>LBE安全大师业界首创面ROOT，无需ROOT也能获取系统权限，完美支持Android4.3系统。\nNFC解锁：利用NFC轻松触碰完美解锁。</item>
         <item>清新风格操作界面，简单易懂，方便快捷，带给您不一样的操作体验。</item>
-
     </string-array>
+
 </resources>
