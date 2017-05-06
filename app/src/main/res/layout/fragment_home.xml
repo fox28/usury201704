@@ -297,7 +297,9 @@
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/RV_fastRecommend"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    >
                 </android.support.v7.widget.RecyclerView>
 
                 <!--速贷攻略 RecyclerView、列表项为3-->
