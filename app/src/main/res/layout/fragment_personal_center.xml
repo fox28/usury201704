@@ -7,9 +7,8 @@
     >
 
     <RelativeLayout
-        android:id="@+id/center_user_info"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="120dp"
         android:background="@color/colorPrimaryBlue"
         >
         <ImageView
@@ -20,26 +19,33 @@
             android:layout_marginEnd="8sp"
             android:layout_marginTop="8dp"
             />
-        <ImageView
-            android:id="@+id/iv_user_avatar"
-            android:layout_width="60dip"
-            android:layout_height="60dip"
-            android:layout_marginTop="20sp"
-            android:layout_marginStart="30sp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/contactlogo"
-            />
-        <TextView
-            android:id="@+id/tv_user_name"
+        <RelativeLayout
+            android:id="@+id/center_user_info"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/iv_user_avatar"
-            android:layout_marginTop="8sp"
-            android:layout_marginBottom="8dp"
-            android:layout_marginStart="35sp"
-            android:text="sd289"
-            android:textSize="18sp"
-            android:textColor="@color/white"/>
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:padding="9dp"
+            >
+            <ImageView
+                android:id="@+id/iv_user_avatar"
+                android:layout_width="60dip"
+                android:layout_height="60dip"
+                android:scaleType="centerCrop"
+                android:src="@drawable/contact_logo"
+                android:layout_centerHorizontal="true"
+                />
+            <TextView
+                android:id="@+id/tv_user_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/iv_user_avatar"
+                android:layout_marginTop="8sp"
+                android:layout_centerHorizontal="true"
+                android:text="@string/username_default"
+                android:textSize="18sp"
+                android:textColor="@color/white"/>
+        </RelativeLayout>
     </RelativeLayout>
 
     <LinearLayout
