@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimaryBlue">#3b75d9</color>
+    <color name="colorPrimaryBlue">#5be0ef</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="bottom_bar_taobao_bg">#F9F7F4</color>
@@ -16,4 +16,5 @@
     <color name="divide_yellow">#f2b355</color>
     <color name="yellow">#ff0</color>
     <color name="gray1">#f2f1f1</color>
+    <color name="blue">#004cff</color>
 </resources>

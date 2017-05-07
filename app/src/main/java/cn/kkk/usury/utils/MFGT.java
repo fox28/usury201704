@@ -2,8 +2,10 @@ package cn.kkk.usury.utils;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.support.v4.app.FragmentActivity;
 
 import cn.kkk.usury.R;
+import cn.kkk.usury.view.activity.LoginActivity;
 import cn.kkk.usury.view.activity.MainActivity;
 
 
@@ -37,14 +39,14 @@ public class MFGT {
         startActivity(activity, MainActivity.class);
     }
 
+    public static void gotoLogin(Activity activity) {
+        startActivity(activity, LoginActivity.class);
+    }
+
 //    public static void gotoWelcomeActivity(Activity activity) {
 //        startActivity(activity, WelcomeActivity.class);
 //    }
-//
-//    public static void gotoLoginActivity(Activity activity) {
-//        startActivity(activity, LoginActivity.class);
-//    }
-//
+
 //    public static void gotoRegisterActivity(Activity activity) {
 //        startActivity(activity, RegisterActivity.class);
 //    }
