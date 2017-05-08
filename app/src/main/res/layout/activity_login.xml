@@ -19,7 +19,7 @@
             >
             <RadioButton
                 android:id="@+id/menu_code"
-                style="@style/menu_item_style"
+                style="@style/login_item_style"
                 android:text="快捷登录"
                 android:button="@null"
                 android:textColor="@color/main_botton_text_color"
@@ -27,7 +27,7 @@
                 />
             <RadioButton
                 android:id="@+id/menu_password"
-                style="@style/menu_item_style"
+                style="@style/login_item_style"
                 android:text="账号登录"
                 android:button="@null"
                 android:textColor="@color/main_botton_text_color"
