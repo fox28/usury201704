@@ -9,7 +9,7 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/app_yahoo_512px_1075337"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
     >
@@ -18,7 +18,10 @@
                   >
 
         </activity>
-        <activity android:name="cn.kkk.usury.view.activity.SplashActivity">
+        <activity
+            android:name="cn.kkk.usury.view.activity.SplashActivity"
+            android:icon="@drawable/app_yahoo_512px_1075337"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
