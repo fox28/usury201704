@@ -1,5 +1,9 @@
 package cn.kkk.usury.view.activity;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -29,6 +33,7 @@ public class LoginActivity extends AppCompatActivity{
     RelativeLayout mFragmentContainer;
     int index = 0;
     int currentIndex = 0;
+    FragmentReceiver mReceiver;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -37,7 +42,16 @@ public class LoginActivity extends AppCompatActivity{
 
         initView();
         initFragment();
+        setListener();
 
+        // 接受广播
+        mReceiver = new FragmentReceiver();
+        IntentFilter filter = new IntentFilter("set-fragment-identifying-code");
+        registerReceiver(mReceiver, filter);
+
+    }
+
+    private void setListener() {
     }
 
     private void initFragment() {
@@ -84,5 +98,20 @@ public class LoginActivity extends AppCompatActivity{
             transaction.show(mFragments[index]).commit();
             currentIndex = index;
         }
+    }
+
+    class FragmentReceiver extends BroadcastReceiver {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            index = intent.getIntExtra("index", index);
+            setFragment();
+            L.e(TAG, "FragmentReceiver, onReceive, index ="+ index);
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(mReceiver);
     }
 }

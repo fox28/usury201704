@@ -17,4 +17,9 @@
     <string name="password_hint">6-20位密码</string>
     <string name="register">注册</string>
     <string name="forgive_password">忘记密码</string>
+    <string name="phoneNum_cannot_be_empty">手机号码不能为空。</string>
+    <string name="password_cannot_be_empty">密码不能为空。</string>
+    <string name="illegal_phone_number">请输入11位手机号码</string>
+    <string name="illegal_password">请输入6-20位密码</string>
+    <string name="identifyingCode_cannot_be_empty">验证码不能为空</string>
 </resources>
