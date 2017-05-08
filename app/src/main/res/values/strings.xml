@@ -15,4 +15,6 @@
     <string name="login">登录</string>
     <string name="slogan">急速借款，上好贷款管家</string>
     <string name="password_hint">6-20位密码</string>
+    <string name="register">注册</string>
+    <string name="forgive_password">忘记密码</string>
 </resources>

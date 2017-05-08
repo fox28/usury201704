@@ -9,6 +9,33 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <include layout="@layout/common_head_title"/>
+        <RadioGroup
+            android:id="@+id/menu_login"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal"
+            android:background="@color/white"
+            android:gravity="center_vertical"
+            >
+            <RadioButton
+                android:id="@+id/menu_code"
+                style="@style/menu_item_style"
+                android:text="快捷登录"
+                android:button="@null"
+                android:textColor="@color/main_botton_text_color"
+                android:checked="true"
+                />
+            <RadioButton
+                android:id="@+id/menu_password"
+                style="@style/menu_item_style"
+                android:text="账号登录"
+                android:button="@null"
+                android:textColor="@color/main_botton_text_color"
+                android:checked="false"
+                />
+
+        </RadioGroup>
+
         <RelativeLayout
             android:id="@+id/fragment_container"
             android:layout_width="match_parent"

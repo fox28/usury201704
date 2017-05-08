@@ -1,21 +1,88 @@
 package cn.kkk.usury.view.activity;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.RadioButton;
+import android.widget.RelativeLayout;
 
 import cn.kkk.usury.R;
+import cn.kkk.usury.utils.L;
+import cn.kkk.usury.view.fragment.LoginIdentifyingCodeFragment;
+import cn.kkk.usury.view.fragment.LoginPasswordFragment;
 
 
 /**
  * Created by apple on 2017/5/7.
  */
 
-public class LoginActivity extends Activity{
+public class LoginActivity extends AppCompatActivity{
+    private static final String TAG = "LoginActivity";
+    RadioButton mRadioButtonCode, mRadioButtonPassword;
+    RadioButton[] mRadioButtons;
+    Fragment[] mFragments;
+    LoginIdentifyingCodeFragment mCodeFragment;
+    LoginPasswordFragment mPasswordFragment;
+    RelativeLayout mFragmentContainer;
+    int index = 0;
+    int currentIndex = 0;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        initView();
+        initFragment();
+
+    }
+
+    private void initFragment() {
+        mCodeFragment = new LoginIdentifyingCodeFragment();
+        mPasswordFragment = new LoginPasswordFragment();
+        mFragments = new Fragment[2];
+        mFragments[0] = mCodeFragment;
+        mFragments[1] = mPasswordFragment;
+
+        getSupportFragmentManager().beginTransaction()
+                .add(R.id.fragment_container, mCodeFragment)
+                .add(R.id.fragment_container, mPasswordFragment)
+                .hide(mPasswordFragment)
+                .show(mCodeFragment)
+                .commit();
+    }
+
+    private void initView() {
+        mRadioButtonCode = (RadioButton) findViewById(R.id.menu_code);
+        mRadioButtonPassword = (RadioButton) findViewById(R.id.menu_password);
+        mFragmentContainer = (RelativeLayout) findViewById(R.id.fragment_container);
+    }
+
+    public void onCheckedChange(View view) {
+        switch (view.getId()) {
+            case R.id.menu_code:
+                index = 0;
+                break;
+            case R.id.menu_password:
+                index = 1;
+                break;
+        }
+        L.e(TAG, "index="+index);
+        setFragment();
+    }
+
+    private void setFragment() {
+        if (index != currentIndex) {
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            transaction.hide(mFragments[currentIndex]);
+            if (!mFragments[index].isAdded()) {
+                transaction.add(R.id.fragment_container, mFragments[index]);
+            }
+            transaction.show(mFragments[index]).commit();
+            currentIndex = index;
+        }
     }
 }

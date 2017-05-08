@@ -24,8 +24,10 @@
         <item name="android:gravity">center</item>
         <item name="android:paddingTop">7dp</item>
         <item name="android:textColor">#fff</item>
+        <item name="android:textSize">22sp</item>
         <item name="android:onClick">onCheckedChange</item>
     </style>
+
 
     <style name="AnimFade2" parent="@android:style/Animation.Activity">
         <item name="android:activityOpenEnterAnimation">@anim/slide_in_from_right</item>
