@@ -60,11 +60,13 @@
         android:layout_marginTop="10dp"
         android:background="@color/white"
         >
-        <TextView
-            android:layout_width="wrap_content"
+        <EditText
+            android:id="@+id/et_phone_num"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/login_username_hint"
             android:layout_marginStart="@dimen/margin_left_10"
+            android:background="@null"
             />
     </LinearLayout>
     <RelativeLayout
@@ -74,13 +76,17 @@
         android:layout_marginTop="2dp"
         android:background="@color/white"
         >
-        <TextView
-            android:layout_width="wrap_content"
+        <EditText
+            android:id="@+id/et_identifying_code"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/identifying_code"
             android:layout_marginStart="@dimen/margin_left_10"
+            android:inputType="textPassword"
+            android:background="@null"
             />
         <TextView
+            android:id="@+id/tv_send_code"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
@@ -97,6 +103,7 @@
         android:layout_marginTop="15dp"
         >
         <Button
+            android:id="@+id/btn_login"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="3"
