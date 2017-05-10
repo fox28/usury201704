@@ -7,9 +7,11 @@ public interface I {
 	// https://modelx.yuzhidushu.com/api/v1/user/login
 
 	String SERVER_ROOT = "https://modelx.yuzhidushu.com/api/v1/user/";
+	String UTF_8 = "utf-8";
 
 	/** 临时用户登录：*/
 	String TEMPORARY_LOGIN 								= 		"temp/login";
+
 
 	public static interface User{
 		String MAC_UUID					=		"mac_uuid";
