@@ -4,15 +4,15 @@ import java.io.Serializable;
 
 public class Result implements Serializable {
 	private int retCode = -1;
-	private boolean retMsg;
+	private String retMsg;
 	private Object retData;
 	public Result() {
 	}
-	public Result(boolean retMsg, int retCode){
+	public Result(String retMsg, int retCode){
 		this.retMsg = retMsg;
 		this.retCode = retCode;
 	}
-	public Result(int retCode, boolean retMsg, Object retData) {
+	public Result(int retCode, String retMsg, Object retData) {
 		super();
 		this.retCode = retCode;
 		this.retMsg = retMsg;
@@ -24,10 +24,10 @@ public class Result implements Serializable {
 	public void setRetCode(int retCode) {
 		this.retCode = retCode;
 	}
-	public boolean isRetMsg() {
+	public String getRetMsg() {
 		return retMsg;
 	}
-	public void setRetMsg(boolean retMsg) {
+	public void setRetMsg(String retMsg) {
 		this.retMsg = retMsg;
 	}
 	public Object getRetData() {
