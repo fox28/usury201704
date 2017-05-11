@@ -16,6 +16,7 @@ public class SharePreferenceUtils {
     private static final String SHARE_PREFERENCE_NAME = "cn.kkk.usury_save_userInfo";
     // 保存数据的字段
     private static final String SAVE_USERINFO_PHONENUM = "m_user_phoneNum";
+    private static final String SAVE_ACCESS_TOKEN = "m_user_access_token";
 
     static SharePreferenceUtils instance;
     SharedPreferences sharePreferences;
@@ -43,6 +44,14 @@ public class SharePreferenceUtils {
     // 读取数据方法
     public String getPhoneNum() {
         return sharePreferences.getString(SAVE_USERINFO_PHONENUM, null);
+    }
+
+    public void setAccessToken(String access_token) {
+        editor.putString(SAVE_ACCESS_TOKEN, access_token).commit();
+    }
+
+    public String getAccessToken() {
+        return sharePreferences.getString(SAVE_ACCESS_TOKEN,null);
     }
 
     // 用户退出登录后、清空数据

@@ -6,16 +6,30 @@ public interface I {
 	// https://modelx.yuzhidushu.com/api/v1/user/sms
 	// https://modelx.yuzhidushu.com/api/v1/user/login
 
+	/** 临时用户登录：*/
 	String SERVER_ROOT = "https://modelx.yuzhidushu.com/api/v1/user/";
+	String REQUEST_USER_TEMPORARY_LOGIN				= 		"https://modelx.yuzhidushu.com/api/v1/user/temp/login";
+	String REQUEST_USER_TICKETS						= 		"https://modelx.yuzhidushu.com/api/v1/user/tickets";
+	String REQUEST_USER_SMS							= 		"https://modelx.yuzhidushu.com/api/v1/user/sms";
+	String REQUEST_USER_LOGIN						= 		"https://modelx.yuzhidushu.com/api/v1/user/login";
+
+
 	String UTF_8 = "utf-8";
 
-	/** 临时用户登录：*/
-	String TEMPORARY_LOGIN 								= 		"temp/login";
+
 
 
 	public static interface User{
 		String MAC_UUID					=		"mac_uuid";
-	}
+		String TOKEN					=		"token";
+		String INEEDTICKETS				=		"ineedtickets";
+    }
+
+	/** SharePreference文件名 */
+	public static interface SharePreference{
+		String SHARE_PREFERENCE_NAME				=		"cn.kkk.usury_save_userInfo";
+		String SAVE_ACCESS_TOKEN					=		"m_user_access_token";
+    }
 
 //	public static interface User {
 //		String MAC_UUID							=		"t_superwechat_user";
