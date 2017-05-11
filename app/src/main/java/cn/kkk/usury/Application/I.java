@@ -24,6 +24,11 @@ public interface I {
 		String TOKEN					=		"token";
 		String INEEDTICKETS				=		"ineedtickets";
     }
+	public static interface Sms{
+		String TELEPHONE				=		"telephone";
+		String KEY						=		"key";
+		String TICKETS					=		"tickets";
+    }
 
 	/** SharePreference文件名 */
 	public static interface SharePreference{

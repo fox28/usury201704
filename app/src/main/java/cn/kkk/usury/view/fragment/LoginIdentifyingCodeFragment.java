@@ -13,12 +13,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
 
 import cn.kkk.usury.Application.I;
-import cn.kkk.usury.Application.SharePreferenceUtils;
 import cn.kkk.usury.R;
 import cn.kkk.usury.utils.L;
 import okhttp3.Call;
@@ -39,6 +39,10 @@ public class LoginIdentifyingCodeFragment extends Fragment {
     EditText mEtPhone, mEtIdentifyingCode;
     TextView mTvSendCode;
     Button mBtnLogin;
+    String key;
+    int tickets;
+    String telephone;
+    String access_token;
 
     @Nullable
     @Override
@@ -64,10 +68,7 @@ public class LoginIdentifyingCodeFragment extends Fragment {
     }
 
     private void gitTicketsForCode() {
-        // 获得token
-        SharedPreferences sp = getActivity().getSharedPreferences(I.SharePreference.SHARE_PREFERENCE_NAME,
-                Context.MODE_PRIVATE);
-        final String access_token = sp.getString(I.SharePreference.SAVE_ACCESS_TOKEN, null);
+        iniAccessToken();
 
         // https://modelx.yuzhidushu.com/api/v1/user/tickets
         RequestBody requestBody = new FormBody.Builder()
@@ -89,41 +90,109 @@ public class LoginIdentifyingCodeFragment extends Fragment {
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 String json = response.body().string();
-                L.e(TAG, "Authorization = "+"Bearer "+access_token+", \n url = "+I.REQUEST_USER_TICKETS);
-                L.e(TAG, "gitTicketsForCode, onResponse, json = "+json);
+                try {
+                    JSONObject jsonObject = new JSONObject(json);
+                    JSONObject tokenObject = jsonObject.getJSONObject("data").getJSONObject("temp_token");
+//                    L.e(TAG, "tokenObject = "+ tokenObject);
+                    key = tokenObject.getString("key");
+                    tickets = tokenObject.getInt("tickets");
+//                    L.e(TAG, "gitTicketsForCode--onResponse--,key="+key+", tickets="+tickets);
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
+    }
+
+    private void iniAccessToken() {
+        // 获得token
+        SharedPreferences sp = getActivity().getSharedPreferences(I.SharePreference.SHARE_PREFERENCE_NAME,
+                Context.MODE_PRIVATE);
+        access_token = sp.getString(I.SharePreference.SAVE_ACCESS_TOKEN, null);
     }
 
 
     private void setListener() {
-        setOnClickLoginByIdentifyingCode();
+        setOnListenerSendCode();
+        setOnListenerLoginByIdentifyingCode();
     }
 
-    private void setOnClickLoginByIdentifyingCode() {
+    private void setOnListenerSendCode() {
+        // POST：https://modelx.yuzhidushu.com/api/v1/user/sms
+        // 参数 telephone key tickets
+
+        mTvSendCode.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (checkInputForCode()) {
+                    RequestBody requestBody = new FormBody.Builder()
+                            .add(I.Sms.TELEPHONE, telephone)
+                            .add(I.Sms.KEY, key)
+                            .add(I.Sms.TICKETS, String.valueOf(tickets))
+                            .build();
+                    Request request = new Request.Builder()
+                            .url(I.REQUEST_USER_SMS)
+                            .addHeader("Content-Type", "application/json")
+                            .addHeader("Authorization", "Bearer "+access_token)
+                            .post(requestBody)
+                            .build();
+                    Call call = new  OkHttpClient().newCall(request);
+                    call.enqueue(new Callback() {
+                        @Override
+                        public void onFailure(Call call, IOException e) {
+
+                        }
+
+                        @Override
+                        public void onResponse(Call call, Response response) throws IOException {
+                            String json = response.body().string();
+                            L.e(TAG, "setOnListenerSendCode, onResponse, json = "+json);
+                        }
+                    });
+                }
+            }
+        });
+    }
+
+    private void setOnListenerLoginByIdentifyingCode() {
         mBtnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                checkInput();
+                checkInputForLogin();
             }
         });
 
     }
 
-    private boolean checkInput() {
-        String phoneNum = mEtPhone.getText().toString().trim();
-        String identifyingCode = mEtIdentifyingCode.getText().toString().trim();
-        if (TextUtils.isEmpty(phoneNum)) {
+    private boolean checkInputForCode() {
+        telephone = mEtPhone.getText().toString().trim();
+        if (TextUtils.isEmpty(telephone)) {
             mEtPhone.requestFocus();
-            mEtPhone.setError(getString(R.string.phoneNum_cannot_be_empty));
+            mEtPhone.setError(getString(R.string.telephone_cannot_be_empty));
+            return false;
+        }
+        if (!telephone.matches("\\d{11}")) {
+            mEtPhone.requestFocus();
+            mEtPhone.setError(getString(R.string.illegal_phone_number));
+        }
+        return true;
+    }
+
+    private boolean checkInputForLogin() {
+        telephone = mEtPhone.getText().toString().trim();
+        String identifyingCode = mEtIdentifyingCode.getText().toString().trim();
+        if (TextUtils.isEmpty(telephone)) {
+            mEtPhone.requestFocus();
+            mEtPhone.setError(getString(R.string.telephone_cannot_be_empty));
             return false;
         }
         if (TextUtils.isEmpty(identifyingCode)) {
             mEtIdentifyingCode.requestFocus();
             mEtIdentifyingCode.setError(getString(R.string.identifyingCode_cannot_be_empty));
         }
-        if (!phoneNum.matches("\\d{11}")) {
+        if (!telephone.matches("\\d{11}")) {
             mEtPhone.requestFocus();
             mEtPhone.setError(getString(R.string.illegal_phone_number));
         }
