@@ -35,7 +35,6 @@ public class SplashActivity extends Activity {
     private static final String TAG = "SplashActivity";
 
     private User mUser;
-    IUserModel model;
     private static final int sleepTime = 2000;
     String mac_uuid;
 
@@ -49,7 +48,6 @@ public class SplashActivity extends Activity {
     private void initData() {
         mac_uuid = new DeviceUuidFactory(this).getDeviceUuid().toString();
         L.e(TAG, "initData, mac_uuid = "+mac_uuid);
-        model = new UserModel();
         mUser = new User();
     }
 

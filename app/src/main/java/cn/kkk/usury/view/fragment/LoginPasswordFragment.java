@@ -100,7 +100,7 @@ public class LoginPasswordFragment extends Fragment {
         password = mEtPassword.getText().toString().trim();
         if (TextUtils.isEmpty(phoneNum)) {
             mEtPhone.requestFocus();
-            mEtPhone.setError(getString(R.string.phoneNum_cannot_be_empty));
+            mEtPhone.setError(getString(R.string.telephone_cannot_be_empty));
             return false;
         }
         if (TextUtils.isEmpty(password)) {
