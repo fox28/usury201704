@@ -10,11 +10,13 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 
 import cn.kkk.usury.R;
 import cn.kkk.usury.utils.L;
+import cn.kkk.usury.utils.MFGT;
 import cn.kkk.usury.view.fragment.LoginIdentifyingCodeFragment;
 import cn.kkk.usury.view.fragment.LoginPasswordFragment;
 
@@ -31,6 +33,7 @@ public class LoginActivity extends AppCompatActivity{
     LoginIdentifyingCodeFragment mCodeFragment;
     LoginPasswordFragment mPasswordFragment;
     RelativeLayout mFragmentContainer;
+    LinearLayout mBackArea;
     int index = 0;
     int currentIndex = 0;
     FragmentReceiver mReceiver;
@@ -52,6 +55,16 @@ public class LoginActivity extends AppCompatActivity{
     }
 
     private void setListener() {
+        setOnListenerBack();
+    }
+
+    private void setOnListenerBack() {
+        mBackArea.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MFGT.finish(LoginActivity.this);
+            }
+        });
     }
 
     private void initFragment() {
@@ -73,6 +86,7 @@ public class LoginActivity extends AppCompatActivity{
         mRadioButtonCode = (RadioButton) findViewById(R.id.menu_code);
         mRadioButtonPassword = (RadioButton) findViewById(R.id.menu_password);
         mFragmentContainer = (RelativeLayout) findViewById(R.id.fragment_container);
+        mBackArea = (LinearLayout) findViewById(R.id.layout_backArea);
     }
 
     public void onCheckedChange(View view) {
