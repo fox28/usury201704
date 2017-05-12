@@ -16,7 +16,6 @@ import cn.kkk.usury.Application.DeviceUuidFactory;
 import cn.kkk.usury.Application.I;
 import cn.kkk.usury.R;
 import cn.kkk.usury.model.bean.User;
-import cn.kkk.usury.model.net.IUserModel;
 import cn.kkk.usury.utils.L;
 import cn.kkk.usury.utils.MFGT;
 import okhttp3.Call;
@@ -96,14 +95,9 @@ public class SplashActivity extends Activity {
                         L.e(TAG, "userObject = "+userObject);
                         SharedPreferences sp = SplashActivity.this.getSharedPreferences(I.SharePreference.SHARE_PREFERENCE_NAME, MODE_PRIVATE);
                         SharedPreferences.Editor edit = sp.edit();
-                        edit.putString(I.SharePreference.SAVE_ACCESS_TOKEN, userObject.getString("access_token")).commit();
-//                        mUser.setId(userObject.getInt("id"));
-//                        mUser.setName(userObject.getString("name"));
-//                        mUser.setCreated_at(userObject.getString("created_at"));
-//                        mUser.setUpdated_at(userObject.getString("updated_at"));
-//                        mUser.setMac_uuid(userObject.getString("mac_uuid"));
-//                        mUser.setAccess_token(userObject.getString("access_token"));
-//                        L.e(TAG, "mUser = "+mUser);
+                        edit.putString(I.SharePreference.ACCESS_TOKEN, userObject.getString("access_token"));
+                        edit.putInt(I.SharePreference.ID, userObject.getInt("id"));
+                        edit.commit();
 
                     }
                 } catch (JSONException e) {

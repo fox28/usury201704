@@ -29,9 +29,9 @@ public class UsuryApplication extends Application{
 
     public static User getCurrentUser() {
         if (currentUser != null) {
-            String phoneNum = SharePreferenceUtils.getInstance().getPhoneNum();
-            L.e("application", "phoneNum = "+phoneNum);
-            currentUser = new User(phoneNum);
+            String telephone = SharePreferenceUtils.getInstance().getTelephone();
+            L.e("application", "telephone = "+telephone);
+            currentUser = new User(telephone);
         }
         return currentUser;
     }

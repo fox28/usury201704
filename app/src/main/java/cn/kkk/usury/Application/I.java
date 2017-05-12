@@ -29,12 +29,19 @@ public interface I {
 		String KEY						=		"key";
 		String TICKETS					=		"tickets";
     }
+	public static interface Login{
+		String TELEPHONE				=		"telephone";
+		String CODE						=		"code";
+		String USER_ID					=		"user_id";
+    }
 
 	/** SharePreference文件名 */
 	public static interface SharePreference{
 		String SHARE_PREFERENCE_NAME				=		"cn.kkk.usury_save_userInfo";
-		String SAVE_ACCESS_TOKEN					=		"m_user_access_token";
-    }
+		String ACCESS_TOKEN 						=		"m_user_access_token";
+		String ID									=		"m_user_id";
+		String TELEPHONE							=		"m_user_telephone";
+	}
 
 //	public static interface User {
 //		String MAC_UUID							=		"t_superwechat_user";

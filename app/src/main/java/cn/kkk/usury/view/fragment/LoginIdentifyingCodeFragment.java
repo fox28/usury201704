@@ -19,8 +19,11 @@ import org.json.JSONObject;
 import java.io.IOException;
 
 import cn.kkk.usury.Application.I;
+import cn.kkk.usury.Application.SharePreferenceUtils;
 import cn.kkk.usury.R;
+import cn.kkk.usury.model.bean.User;
 import cn.kkk.usury.utils.L;
+import cn.kkk.usury.utils.UserUtils;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.FormBody;
@@ -39,10 +42,14 @@ public class LoginIdentifyingCodeFragment extends Fragment {
     EditText mEtPhone, mEtIdentifyingCode;
     TextView mTvSendCode;
     Button mBtnLogin;
+    /** uer对象属性*/
+    User mUser = new User();
+    int id;
     String key;
     int tickets;
     String telephone;
     String access_token;
+    String code;// user/login 用户登录需要的参数
 
     @Nullable
     @Override
@@ -68,9 +75,15 @@ public class LoginIdentifyingCodeFragment extends Fragment {
     }
 
     private void gitTicketsForCode() {
-        iniAccessToken();
-
+        // 获得token, id  tickets
         // https://modelx.yuzhidushu.com/api/v1/user/tickets
+        SharedPreferences sp = getActivity().getSharedPreferences(I.SharePreference.SHARE_PREFERENCE_NAME,
+                Context.MODE_PRIVATE);
+        id = sp.getInt(I.SharePreference.ID, -1);
+        access_token = sp.getString(I.SharePreference.ACCESS_TOKEN, null);
+        L.e(TAG, "iniUserInfo, id = "+id+", access_token = "+access_token);
+
+
         RequestBody requestBody = new FormBody.Builder()
                 .add(I.User.TOKEN, I.User.INEEDTICKETS)
                 .build();
@@ -96,7 +109,7 @@ public class LoginIdentifyingCodeFragment extends Fragment {
 //                    L.e(TAG, "tokenObject = "+ tokenObject);
                     key = tokenObject.getString("key");
                     tickets = tokenObject.getInt("tickets");
-//                    L.e(TAG, "gitTicketsForCode--onResponse--,key="+key+", tickets="+tickets);
+                    L.e(TAG, "gitTicketsForCode, 返回值 ,key="+key+", tickets="+tickets);
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -104,13 +117,6 @@ public class LoginIdentifyingCodeFragment extends Fragment {
             }
         });
 
-    }
-
-    private void iniAccessToken() {
-        // 获得token
-        SharedPreferences sp = getActivity().getSharedPreferences(I.SharePreference.SHARE_PREFERENCE_NAME,
-                Context.MODE_PRIVATE);
-        access_token = sp.getString(I.SharePreference.SAVE_ACCESS_TOKEN, null);
     }
 
 
@@ -149,6 +155,13 @@ public class LoginIdentifyingCodeFragment extends Fragment {
                         public void onResponse(Call call, Response response) throws IOException {
                             String json = response.body().string();
                             L.e(TAG, "setOnListenerSendCode, onResponse, json = "+json);
+                            try {
+                                JSONObject jsonObject = new JSONObject(json);
+                                code = jsonObject.getJSONObject("data").getString("code");
+                                L.e(TAG, "setOnListenerSendCode, 返回值， code = "+code);
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
                         }
                     });
                 }
@@ -157,14 +170,86 @@ public class LoginIdentifyingCodeFragment extends Fragment {
     }
 
     private void setOnListenerLoginByIdentifyingCode() {
+        // POST：https://modelx.yuzhidushu.com/api/v1/user/login
         mBtnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                checkInputForLogin();
+                if (checkInputForLogin()) {
+                    // RequestBode:telephone, code, user_id
+                    RequestBody requestBody = new FormBody.Builder()
+                            .add(I.Login.TELEPHONE, telephone)
+                            .add(I.Login.CODE, code)
+                            .add(I.Login.USER_ID, String.valueOf(id))
+                            .build();
+                    // Header:Content-Type:application/json Authorization:Bearer access_token
+                    Request request = new Request.Builder()
+                            .url(I.REQUEST_USER_LOGIN)
+                            .addHeader("Content-Type", "application/json")
+                            .addHeader("Authorization", "Bearer "+access_token)
+                            .post(requestBody)
+                            .build();
+                    Call call = new OkHttpClient().newCall(request);
+                    call.enqueue(new Callback() {
+                        @Override
+                        public void onFailure(Call call, IOException e) {
+
+                        }
+
+                        @Override
+                        public void onResponse(Call call, Response response) throws IOException {
+                            String json = response.body().string();
+
+                            L.e(TAG, "setOnListenerLoginByIdentifyingCode, 发送参数："+I.Login.TELEPHONE+", "+I.Login.CODE+", "+I.Login.USER_ID);
+                            L.e(TAG, "setOnListenerLoginByIdentifyingCode, telephone ="+telephone+", id="+id+", code="+code);
+                            L.e(TAG, "setOnListenerLoginByIdentifyingCode, onResponse, json = "+json);
+                            try {
+                                JSONObject jsonObject = new JSONObject(json);
+                                if (jsonObject.getString("errmsg").equals("success")) {
+
+                                    JSONObject userObject = jsonObject.getJSONObject("data").getJSONObject("user");
+//                                    mUser.setId(userObject.getInt("id"));
+//                                    mUser.setName(userObject.getString("name"));
+//                                    mUser.setTelephone(userObject.getString("telephone"));
+//                                    mUser.setEmail(userObject.getString("email"));
+//                                    mUser.setCreated_at(userObject.getString("created_at"));
+//                                    mUser.setUpdated_at(userObject.getString("updated_at"));
+//                                    mUser.setMac_uuid(userObject.getString("mac_uuid"));
+//                                    mUser.setAccess_token(userObject.getString("access_token"));
+
+                                    mUser = UserUtils.getUserFromJson(jsonObject);
+                                    L.e(TAG, "mUser = " + mUser);
+
+                                }
+
+//                                SharedPreferences sp = getActivity().getSharedPreferences(I.SharePreference.SHARE_PREFERENCE_NAME,
+//                                        Context.MODE_PRIVATE);
+//                                SharedPreferences.Editor edit = sp.edit();
+                                // id  telephone  access_token
+                                SharePreferenceUtils.init(getContext());
+                                SharePreferenceUtils.getInstance().setId(mUser.getId());
+                                SharePreferenceUtils.getInstance().setTelephone(mUser.getTelephone());
+                                SharePreferenceUtils.getInstance().setAccessToken(mUser.getAccess_token());
+                                L.e(TAG, "setOnListenerLoginByIdentifyingCode, SharedPreferences_telephone"+
+                                SharePreferenceUtils.getInstance().getTelephone());
+//                                edit.putInt(I.SharePreference.ID, mUser.getId());
+//                                edit.putString(I.SharePreference.TELEPHONE, telephone);
+//                                edit.putString(I.SharePreference.ACCESS_TOKEN, access_token);
+
+
+
+
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    });
+                }
             }
         });
 
     }
+
+
 
     private boolean checkInputForCode() {
         telephone = mEtPhone.getText().toString().trim();
