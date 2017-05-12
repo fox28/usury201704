@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -65,6 +66,7 @@ public class LoginIdentifyingCodeFragment extends Fragment {
         mEtPhone = (EditText) view.findViewById(R.id.et_phone_num);
         mTvSendCode = (TextView) view.findViewById(R.id.tv_send_code);
         mBtnLogin = (Button) view.findViewById(R.id.btn_login);
+        setButtonLoginEnabled(false);
     }
 
     @Override
@@ -99,7 +101,6 @@ public class LoginIdentifyingCodeFragment extends Fragment {
             public void onFailure(Call call, IOException e) {
 
             }
-
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 String json = response.body().string();
@@ -158,10 +159,19 @@ public class LoginIdentifyingCodeFragment extends Fragment {
                             try {
                                 JSONObject jsonObject = new JSONObject(json);
                                 code = jsonObject.getJSONObject("data").getString("code");
-                                L.e(TAG, "setOnListenerSendCode, 返回值， code = "+code);
+//                                L.e(TAG, "setOnListenerSendCode, 返回值， code = "+code);
+                                if (!code.isEmpty()) {
+                                    getActivity().runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            setButtonLoginEnabled(true);
+                                        }
+                                    });
+                                }
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
+
                         }
                     });
                 }
@@ -174,6 +184,10 @@ public class LoginIdentifyingCodeFragment extends Fragment {
         mBtnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+//                if (!mBtnLogin.isEnabled()) {
+//                    Toast.makeText(getActivity(), "请输入验证码", Toast.LENGTH_SHORT).show();
+//                    return;
+//                }
                 if (checkInputForLogin()) {
                     // RequestBode:telephone, code, user_id
                     RequestBody requestBody = new FormBody.Builder()
@@ -206,34 +220,25 @@ public class LoginIdentifyingCodeFragment extends Fragment {
                                 JSONObject jsonObject = new JSONObject(json);
                                 if (jsonObject.getString("errmsg").equals("success")) {
 
-                                    JSONObject userObject = jsonObject.getJSONObject("data").getJSONObject("user");
-//                                    mUser.setId(userObject.getInt("id"));
-//                                    mUser.setName(userObject.getString("name"));
-//                                    mUser.setTelephone(userObject.getString("telephone"));
-//                                    mUser.setEmail(userObject.getString("email"));
-//                                    mUser.setCreated_at(userObject.getString("created_at"));
-//                                    mUser.setUpdated_at(userObject.getString("updated_at"));
-//                                    mUser.setMac_uuid(userObject.getString("mac_uuid"));
-//                                    mUser.setAccess_token(userObject.getString("access_token"));
-
+                                    // 使用UserUtils获得mUser
                                     mUser = UserUtils.getUserFromJson(jsonObject);
                                     L.e(TAG, "mUser = " + mUser);
-
                                 }
 
-//                                SharedPreferences sp = getActivity().getSharedPreferences(I.SharePreference.SHARE_PREFERENCE_NAME,
-//                                        Context.MODE_PRIVATE);
-//                                SharedPreferences.Editor edit = sp.edit();
-                                // id  telephone  access_token
+                                // 使用SharePreferenceUtils给SharePreference的属性赋值
                                 SharePreferenceUtils.init(getContext());
                                 SharePreferenceUtils.getInstance().setId(mUser.getId());
                                 SharePreferenceUtils.getInstance().setTelephone(mUser.getTelephone());
                                 SharePreferenceUtils.getInstance().setAccessToken(mUser.getAccess_token());
-                                L.e(TAG, "setOnListenerLoginByIdentifyingCode, SharedPreferences_telephone"+
-                                SharePreferenceUtils.getInstance().getTelephone());
+                                mBtnLogin.post(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        setButtonLoginEnabled(false);
+                                    }
+                                });
+//                                L.e(TAG, "setOnListenerLoginByIdentifyingCode, SharedPreferences_telephone"+
+//                                SharePreferenceUtils.getInstance().getTelephone());
 //                                edit.putInt(I.SharePreference.ID, mUser.getId());
-//                                edit.putString(I.SharePreference.TELEPHONE, telephone);
-//                                edit.putString(I.SharePreference.ACCESS_TOKEN, access_token);
 
 
 
@@ -282,5 +287,9 @@ public class LoginIdentifyingCodeFragment extends Fragment {
             mEtPhone.setError(getString(R.string.illegal_phone_number));
         }
         return true;
+    }
+
+    private void setButtonLoginEnabled(boolean enabled) {
+        mBtnLogin.setEnabled(enabled);
     }
 }
