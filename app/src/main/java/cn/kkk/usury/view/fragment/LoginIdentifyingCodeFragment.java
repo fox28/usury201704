@@ -52,6 +52,8 @@ public class LoginIdentifyingCodeFragment extends Fragment {
     String access_token;
     String code;// user/login 用户登录需要的参数
 
+    boolean btnIsEnabled = false;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
@@ -66,7 +68,7 @@ public class LoginIdentifyingCodeFragment extends Fragment {
         mEtPhone = (EditText) view.findViewById(R.id.et_phone_num);
         mTvSendCode = (TextView) view.findViewById(R.id.tv_send_code);
         mBtnLogin = (Button) view.findViewById(R.id.btn_login);
-        setButtonLoginEnabled(false);
+//        setButtonLoginEnabled(false);
     }
 
     @Override
@@ -161,12 +163,13 @@ public class LoginIdentifyingCodeFragment extends Fragment {
                                 code = jsonObject.getJSONObject("data").getString("code");
 //                                L.e(TAG, "setOnListenerSendCode, 返回值， code = "+code);
                                 if (!code.isEmpty()) {
-                                    getActivity().runOnUiThread(new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            setButtonLoginEnabled(true);
-                                        }
-                                    });
+//                                    getActivity().runOnUiThread(new Runnable() {
+//                                        @Override
+//                                        public void run() {
+//                                            setButtonLoginEnabled(true);
+//                                        }
+//                                    });
+                                    btnIsEnabled = true;
                                 }
                             } catch (JSONException e) {
                                 e.printStackTrace();
@@ -184,10 +187,10 @@ public class LoginIdentifyingCodeFragment extends Fragment {
         mBtnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                if (!mBtnLogin.isEnabled()) {
-//                    Toast.makeText(getActivity(), "请输入验证码", Toast.LENGTH_SHORT).show();
-//                    return;
-//                }
+                if (!btnIsEnabled) {
+                    Toast.makeText(getActivity(), "请先获得验证码", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 if (checkInputForLogin()) {
                     // RequestBode:telephone, code, user_id
                     RequestBody requestBody = new FormBody.Builder()
@@ -223,6 +226,13 @@ public class LoginIdentifyingCodeFragment extends Fragment {
                                     // 使用UserUtils获得mUser
                                     mUser = UserUtils.getUserFromJson(jsonObject);
                                     L.e(TAG, "mUser = " + mUser);
+                                    btnIsEnabled = false;
+//                                    mBtnLogin.post(new Runnable() {
+//                                        @Override
+//                                        public void run() {
+//                                            setButtonLoginEnabled(false);
+//                                        }
+//                                    });
                                 }
 
                                 // 使用SharePreferenceUtils给SharePreference的属性赋值
@@ -230,12 +240,8 @@ public class LoginIdentifyingCodeFragment extends Fragment {
                                 SharePreferenceUtils.getInstance().setId(mUser.getId());
                                 SharePreferenceUtils.getInstance().setTelephone(mUser.getTelephone());
                                 SharePreferenceUtils.getInstance().setAccessToken(mUser.getAccess_token());
-                                mBtnLogin.post(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        setButtonLoginEnabled(false);
-                                    }
-                                });
+
+
 //                                L.e(TAG, "setOnListenerLoginByIdentifyingCode, SharedPreferences_telephone"+
 //                                SharePreferenceUtils.getInstance().getTelephone());
 //                                edit.putInt(I.SharePreference.ID, mUser.getId());
