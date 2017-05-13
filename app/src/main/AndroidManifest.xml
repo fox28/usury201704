@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="cn.kkk.usury">
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
@@ -12,16 +13,12 @@
         android:roundIcon="@mipmap/app_yahoo_512px_1075337"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-    >
-
-        <activity android:name="cn.kkk.usury.view.activity.MainActivity"
-                  >
-
+        >
+        <activity android:name=".view.activity.MainActivity">
         </activity>
         <activity
-            android:name="cn.kkk.usury.view.activity.SplashActivity"
-            android:icon="@drawable/app_yahoo_512px_1075337"
-            >
+            android:name=".view.activity.SplashActivity"
+            android:icon="@drawable/app_yahoo_512px_1075337">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -29,6 +26,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".view.activity.LoginActivity"/>
+        <activity android:name=".view.activity.PersonalActivity"/>
+        <activity android:name=".view.activity.UpdateActivity"/>
+
     </application>
 
 </manifest>

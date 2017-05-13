@@ -79,6 +79,7 @@
             android:src="@drawable/right_arrow_icon"/>
     </LinearLayout>
     <LinearLayout
+        android:id="@+id/layout_personal_info"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="2dp"
@@ -98,7 +99,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_marginLeft="10dp"
-            android:text="设置身份信息"
+            android:text="个人信息"
             android:textColor="@color/black"
             android:textSize="15sp"
             />
@@ -158,37 +159,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_marginLeft="10dp"
-            android:text="帮助中心@反馈"
-            android:textColor="@color/black"
-            android:textSize="15sp"
-            />
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="10dp"
-            android:src="@drawable/right_arrow_icon"/>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="2dp"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"
-        android:background="@color/white"
-        android:gravity="center"
-        android:orientation="horizontal"
-        >
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:src="@drawable/center_card_coupon3"/>
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_marginLeft="10dp"
-            android:text="设置"
+            android:text="\@帮助中心"
             android:textColor="@color/black"
             android:textSize="15sp"
             />

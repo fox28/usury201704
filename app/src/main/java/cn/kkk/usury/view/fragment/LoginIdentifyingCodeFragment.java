@@ -194,9 +194,9 @@ public class LoginIdentifyingCodeFragment extends Fragment {
                 if (checkInputForLogin()) {
                     // RequestBode:telephone, code, user_id
                     RequestBody requestBody = new FormBody.Builder()
-                            .add(I.Login.TELEPHONE, telephone)
-                            .add(I.Login.CODE, code)
-                            .add(I.Login.USER_ID, String.valueOf(id))
+                            .add(I.LoginByCode.TELEPHONE, telephone)
+                            .add(I.LoginByCode.CODE, code)
+                            .add(I.LoginByCode.USER_ID, String.valueOf(id))
                             .build();
                     // Header:Content-Type:application/json Authorization:Bearer access_token
                     Request request = new Request.Builder()
@@ -216,7 +216,7 @@ public class LoginIdentifyingCodeFragment extends Fragment {
                         public void onResponse(Call call, Response response) throws IOException {
                             String json = response.body().string();
 
-                            L.e(TAG, "setOnListenerLoginByIdentifyingCode, 发送参数："+I.Login.TELEPHONE+", "+I.Login.CODE+", "+I.Login.USER_ID);
+                            L.e(TAG, "setOnListenerLoginByIdentifyingCode, 发送参数："+ I.LoginByCode.TELEPHONE+", "+ I.LoginByCode.CODE+", "+ I.LoginByCode.USER_ID);
                             L.e(TAG, "setOnListenerLoginByIdentifyingCode, telephone ="+telephone+", id="+id+", code="+code);
                             L.e(TAG, "setOnListenerLoginByIdentifyingCode, onResponse, json = "+json);
                             try {
