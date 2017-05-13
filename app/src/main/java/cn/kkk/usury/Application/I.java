@@ -12,6 +12,7 @@ public interface I {
 	String REQUEST_USER_TICKETS						= 		"https://modelx.yuzhidushu.com/api/v1/user/tickets";
 	String REQUEST_USER_SMS							= 		"https://modelx.yuzhidushu.com/api/v1/user/sms";
 	String REQUEST_USER_LOGIN						= 		"https://modelx.yuzhidushu.com/api/v1/user/login";
+	String REQUEST_USER_UPDATE						= 		"https://modelx.yuzhidushu.com/api/v1/user";
 	String REQUEST_USER_LOGIN_BY_PASSWORD			= 		"https://modelx.yuzhidushu.com/api/v1/user/login/password";
 
 
@@ -34,6 +35,11 @@ public interface I {
 		String TELEPHONE				=		"telephone";
 		String CODE						=		"code";
 		String USER_ID					=		"user_id";
+    }
+	public static interface Update {
+		String USER_ID					=		"user_id";
+		String NAME						=		"name";
+		String PASSWORD					=		"password";
     }
 
     public static interface LoginByPassword{

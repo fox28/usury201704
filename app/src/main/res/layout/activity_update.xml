@@ -22,11 +22,11 @@
                 android:text="用户名"
                 />
             <EditText
-                android:id="@+id/et_update_user_nick1"
+                android:id="@+id/et_update_user_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dip"
-                android:layout_marginRight="10dip"
+                android:layout_marginRight="5dip"
                 android:paddingTop="10dp"
                 android:paddingBottom="10dp"
                 android:paddingLeft="5dip"
@@ -75,6 +75,7 @@
             android:textColor="@android:color/white"
             android:gravity="center"
             android:background="@drawable/tb_btn_login_orange_normal"
+            android:onClick="onUpdateSave"
             />
     </LinearLayout>
 </LinearLayout>
