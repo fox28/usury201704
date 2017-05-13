@@ -16,9 +16,11 @@ public class SharePreferenceUtils {
     // sharePreference的文件名, 该文件用于保存username、username可以用于从database读取数据
     private static final String SHARE_PREFERENCE_NAME = "cn.kkk.usury_save_userInfo";
     // 保存数据的字段
-    private static final String ID = "m_user_id";
-    private static final String TELEPHONE = "m_user_telephone";
-    private static final String ACCESS_TOKEN = "m_user_access_token";
+    private static final String ID                  = I.SharePreference.ID;
+    private static final String TELEPHONE           = I.SharePreference.TELEPHONE;
+    private static final String ACCESS_TOKEN        = I.SharePreference.ACCESS_TOKEN;
+    private static final String NAME                = I.SharePreference.NAME;
+
 
     static SharePreferenceUtils mSharePreferenceUtils;
     SharedPreferences sharePreferences;
@@ -65,12 +67,21 @@ public class SharePreferenceUtils {
         return sharePreferences.getString(TELEPHONE, null);
     }
 
+
+
     public void setAccessToken(String access_token) {
         editor.putString(ACCESS_TOKEN, access_token).commit();
     }
-
     public String getAccessToken() {
         return sharePreferences.getString(ACCESS_TOKEN,null);
+    }
+
+
+    public void setName(String name) {
+        editor.putString(NAME, name).commit();
+    }
+    public String getName() {
+        return sharePreferences.getString(NAME,null);
     }
 
     // 用户退出登录后、清空数据

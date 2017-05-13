@@ -7,6 +7,8 @@ import android.support.v4.app.FragmentActivity;
 import cn.kkk.usury.R;
 import cn.kkk.usury.view.activity.LoginActivity;
 import cn.kkk.usury.view.activity.MainActivity;
+import cn.kkk.usury.view.activity.PersonalActivity;
+import cn.kkk.usury.view.activity.UpdateActivity;
 
 
 /**
@@ -41,6 +43,14 @@ public class MFGT {
 
     public static void gotoLogin(Activity activity) {
         startActivity(activity, LoginActivity.class);
+    }
+
+    public static void gotoPersonalActivity(FragmentActivity activity) {
+        startActivity(activity, PersonalActivity.class);
+    }
+
+    public static void gotUpdate(Activity activity) {
+        startActivity(activity, UpdateActivity.class);
     }
 
 //    public static void gotoWelcomeActivity(Activity activity) {

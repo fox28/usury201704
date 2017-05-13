@@ -12,6 +12,7 @@ public interface I {
 	String REQUEST_USER_TICKETS						= 		"https://modelx.yuzhidushu.com/api/v1/user/tickets";
 	String REQUEST_USER_SMS							= 		"https://modelx.yuzhidushu.com/api/v1/user/sms";
 	String REQUEST_USER_LOGIN						= 		"https://modelx.yuzhidushu.com/api/v1/user/login";
+	String REQUEST_USER_LOGIN_BY_PASSWORD			= 		"https://modelx.yuzhidushu.com/api/v1/user/login/password";
 
 
 	String UTF_8 = "utf-8";
@@ -29,11 +30,16 @@ public interface I {
 		String KEY						=		"key";
 		String TICKETS					=		"tickets";
     }
-	public static interface Login{
+	public static interface LoginByCode {
 		String TELEPHONE				=		"telephone";
 		String CODE						=		"code";
 		String USER_ID					=		"user_id";
     }
+
+    public static interface LoginByPassword{
+		String TELEPHONE				=		"telephone";
+		String PASSWORD					=		"password";
+	}
 
 	/** SharePreference文件名 */
 	public static interface SharePreference{
@@ -41,6 +47,8 @@ public interface I {
 		String ACCESS_TOKEN 						=		"m_user_access_token";
 		String ID									=		"m_user_id";
 		String TELEPHONE							=		"m_user_telephone";
+		String NAME									=		"m_user_name";
+
 	}
 
 //	public static interface User {
