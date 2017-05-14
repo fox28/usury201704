@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 
 import cn.kkk.usury.R;
+import cn.kkk.usury.adapter.AdViewAdapter;
 import cn.kkk.usury.adapter.FastRecommendAdapter;
 import cn.kkk.usury.adapter.FastStrategyAdapter;
 import cn.kkk.usury.adapter.NewGoodsAdapter;
@@ -21,6 +22,7 @@ import cn.kkk.usury.adapter.SortPicAdapter;
 import cn.kkk.usury.adapter.SpecialOffersAdapter;
 import cn.kkk.usury.model.bean.AppBean;
 import cn.kkk.usury.model.dao.AppDao;
+import cn.kkk.usury.view.widget.AdView;
 import cn.kkk.usury.view.widget.FlowIndicator;
 import cn.kkk.usury.view.widget.SlideLoopView;
 
@@ -43,6 +45,9 @@ public class HomeFragment extends Fragment {
     FlowIndicator mFlowIndicator;
     ArrayList<String> mSlideList;
 
+    // 垂直轮播数据
+    ArrayList<String> mNewList;
+    AdView mAdView;
 
     public HomeFragment() {
     }
@@ -66,6 +71,11 @@ public class HomeFragment extends Fragment {
 
         // 轮播图
         mSlideLoopView.startPlay(getContext(),mFlowIndicator,mSlideList);
+
+        // 垂直轮播图
+        AdViewAdapter mAdAdapter = new AdViewAdapter(mNewList);
+        mAdView.setAdapter(mAdAdapter);
+        mAdView.start();
 
         // 8张分类图片
         manager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
@@ -114,6 +124,9 @@ public class HomeFragment extends Fragment {
 
         mSlideLoopView = (SlideLoopView) view.findViewById(R.id.slv_homeFragment);
         mFlowIndicator = (FlowIndicator) view.findViewById(R.id.flowIndicator_homeFragment);
+
+        // 垂直轮播
+        mAdView = (AdView) view.findViewById(R.id.adView_vertical_loop);
     }
 
     private void initData() {
@@ -126,5 +139,10 @@ public class HomeFragment extends Fragment {
         mSlideList.add("goods04.png");
         mSlideList.add("goods05.png");
 
+        mNewList = new ArrayList<>();
+        mNewList.add("瑞士军刀，满200-50");
+        mNewList.add("家居家装换新季， 满199减100");
+        mNewList.add("带上相机去旅游，尼康低至477");
+        mNewList.add("价格惊呆！电信千兆光纤上市");
     }
 }

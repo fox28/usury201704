@@ -145,10 +145,10 @@
                             />
                     </LinearLayout>
                 </LinearLayout>
-                <!--滚动信息-->
+                <!--滚动信息 start-->
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="100dp"
                     android:layout_marginTop="8dp"
                     android:background="@color/white"
                     >
@@ -157,6 +157,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
+                        android:layout_alignParentTop="true"
                         >
                         <TextView
                             android:layout_width="wrap_content"
@@ -175,86 +176,107 @@
                             android:layout_marginStart="2dp"
                             />
                     </LinearLayout>
-                    <LinearLayout
-                        android:orientation="horizontal"
+                    <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:weightSum="10"
+                        android:gravity="center_vertical"
                         >
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1.5"
-                            >
-                            <ImageView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:src="@drawable/baidu_safe"
-                                android:background="@color/white"
-                                />
-                        </LinearLayout>
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="6.5"
-                            android:padding="5dp"
-                            android:orientation="vertical"
-                            >
-                            <TextView
-                                android:id="@+id/tv_name"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/app_name_default1"
-                                android:textSize="18sp"
-                                />
-                            <LinearLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal"
-                                >
-                                <TextView
-                                    style="@style/text_vertical_loop"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="广州的上班族"
-                                    />
-                                <TextView
-                                    style="@style/text_vertical_loop"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:textColor="@color/red"
-                                    android:text="柳先生"
-                                    />
-                                <TextView
-                                    style="@style/text_vertical_loop"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="今日借款"
-                                    android:layout_marginStart="5dp"
-                                    />
+                        <cn.kkk.usury.view.widget.AdView
+                            android:id="@+id/adView_vertical_loop"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
 
-                                <TextView
-                                    style="@style/text_vertical_loop"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:textColor="@color/red"
-                                    android:text="5000元"
-                                    />
-                                <TextView
-                                    style="@style/text_vertical_loop"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="已到账"
+                        </cn.kkk.usury.view.widget.AdView>
+                        <!--<TextView-->
+                            <!--android:id="@+id/tv_vertical_loop"-->
+                            <!--android:layout_width="wrap_content"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:text="荣昌的学生党朱女士今日借款已到账"-->
+                            <!--android:layout_marginStart="@dimen/margin_left_10"-->
+                            <!--android:singleLine="true"-->
+                            <!--android:ellipsize="end"-->
+                            <!--/>-->
+                    </RelativeLayout>
 
-                                    />
+                    <!--<LinearLayout-->
+                        <!--android:orientation="horizontal"-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="match_parent"-->
+                        <!--android:weightSum="10"-->
+                        <!--&gt;-->
+                        <!--<LinearLayout-->
+                            <!--android:layout_width="0dp"-->
+                            <!--android:layout_height="match_parent"-->
+                            <!--android:layout_weight="1.5"-->
+                            <!--&gt;-->
+                            <!--<ImageView-->
+                                <!--android:layout_width="match_parent"-->
+                                <!--android:layout_height="match_parent"-->
+                                <!--android:src="@drawable/baidu_safe"-->
+                                <!--android:background="@color/white"-->
+                                <!--/>-->
+                        <!--</LinearLayout>-->
+                        <!--<LinearLayout-->
+                            <!--android:layout_width="0dp"-->
+                            <!--android:layout_height="match_parent"-->
+                            <!--android:layout_weight="6.5"-->
+                            <!--android:padding="5dp"-->
+                            <!--android:orientation="vertical"-->
+                            <!--&gt;-->
+                            <!--<TextView-->
+                                <!--android:id="@+id/tv_name"-->
+                                <!--android:layout_width="wrap_content"-->
+                                <!--android:layout_height="wrap_content"-->
+                                <!--android:text="@string/app_name_default1"-->
+                                <!--android:textSize="18sp"-->
+                                <!--/>-->
+                            <!--<LinearLayout-->
+                                <!--android:layout_width="wrap_content"-->
+                                <!--android:layout_height="wrap_content"-->
+                                <!--android:orientation="horizontal"-->
+                                <!--&gt;-->
+                                <!--<TextView-->
+                                    <!--style="@style/text_vertical_loop"-->
+                                    <!--android:layout_width="wrap_content"-->
+                                    <!--android:layout_height="wrap_content"-->
+                                    <!--android:text="广州的上班族"-->
+                                    <!--/>-->
+                                <!--<TextView-->
+                                    <!--style="@style/text_vertical_loop"-->
+                                    <!--android:layout_width="wrap_content"-->
+                                    <!--android:layout_height="wrap_content"-->
+                                    <!--android:textColor="@color/red"-->
+                                    <!--android:text="柳先生"-->
+                                    <!--/>-->
+                                <!--<TextView-->
+                                    <!--style="@style/text_vertical_loop"-->
+                                    <!--android:layout_width="wrap_content"-->
+                                    <!--android:layout_height="wrap_content"-->
+                                    <!--android:text="今日借款"-->
+                                    <!--android:layout_marginStart="5dp"-->
+                                    <!--/>-->
 
-                            </LinearLayout>
-                        </LinearLayout>
+                                <!--<TextView-->
+                                    <!--style="@style/text_vertical_loop"-->
+                                    <!--android:layout_width="wrap_content"-->
+                                    <!--android:layout_height="wrap_content"-->
+                                    <!--android:textColor="@color/red"-->
+                                    <!--android:text="5000元"-->
+                                    <!--/>-->
+                                <!--<TextView-->
+                                    <!--style="@style/text_vertical_loop"-->
+                                    <!--android:layout_width="wrap_content"-->
+                                    <!--android:layout_height="wrap_content"-->
+                                    <!--android:text="已到账"-->
 
+                                    <!--/>-->
 
-                    </LinearLayout>
+                            <!--</LinearLayout>-->
+                        <!--</LinearLayout>-->
+                    <!--</LinearLayout>-->
 
                 </RelativeLayout>
+                <!--滚动信息 end-->
 
                 <!--8张图片GridView-->
                 <android.support.v7.widget.RecyclerView

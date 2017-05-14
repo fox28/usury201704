@@ -8,4 +8,8 @@
         <attr name="normal_color" format="color"/>
         <attr name="focus_color" format="color"/>
     </declare-styleable>
+    <declare-styleable name="AdView">
+        <attr name="gap" format="integer"/>
+        <attr name="animDuration" format="integer"/>
+    </declare-styleable>
 </resources>
