@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">AppName12</string>
+    <string name="app_name">AppName14</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -24,4 +24,5 @@
     <string name="identifyingCode_cannot_be_empty">验证码不能为空</string>
     <string name="save">保存</string>
     <string name="personal_info">个人信息</string>
+    <string name="data_is_empty">显示数据为空</string>
 </resources>
