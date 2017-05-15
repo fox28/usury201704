@@ -14,10 +14,12 @@ import java.io.IOException;
 
 import cn.kkk.usury.Application.DeviceUuidFactory;
 import cn.kkk.usury.Application.I;
+import cn.kkk.usury.Application.SharePreferenceUtils;
 import cn.kkk.usury.R;
 import cn.kkk.usury.model.bean.User;
 import cn.kkk.usury.utils.L;
 import cn.kkk.usury.utils.MFGT;
+import cn.kkk.usury.utils.UserUtils;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.FormBody;
@@ -91,13 +93,14 @@ public class SplashActivity extends Activity {
                     JSONObject jsonObject = new JSONObject(json);
                     L.e(TAG, "jsonObject = "+jsonObject);
                     if (jsonObject.getString("errmsg").equals("success")) {
-                        JSONObject userObject = jsonObject.getJSONObject("data").getJSONObject("user");
-                        L.e(TAG, "userObject = "+userObject);
-                        SharedPreferences sp = SplashActivity.this.getSharedPreferences(I.SharePreference.SHARE_PREFERENCE_NAME, MODE_PRIVATE);
-                        SharedPreferences.Editor edit = sp.edit();
-                        edit.putString(I.SharePreference.ACCESS_TOKEN, userObject.getString("access_token"));
-                        edit.putInt(I.SharePreference.ID, userObject.getInt("id"));
-                        edit.commit();
+                        User user = UserUtils.getUserFromJson(jsonObject);
+                        SharePreferenceUtils.init(SplashActivity.this);
+                        SharePreferenceUtils.getInstance().setId(user.getId());
+                        SharePreferenceUtils.getInstance().setTelephone(user.getTelephone());
+                        SharePreferenceUtils.getInstance().setAccessToken(user.getAccess_token());
+                        SharePreferenceUtils.getInstance().setName(user.getName());
+
+                        L.e(TAG, "闪存界面，存储的user = "+user);
 
                     }
                 } catch (JSONException e) {
