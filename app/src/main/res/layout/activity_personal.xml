@@ -81,10 +81,10 @@
             android:gravity="center_vertical"
             >
             <TextView
+                android:id="@+id/tv_telephone"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:hint="15192331234"
                 android:paddingStart="10dp"
                 android:layout_marginStart="@dimen/margin_left_10"
                 android:layout_marginEnd="@dimen/margin_right_10"
@@ -120,10 +120,10 @@
             android:gravity="center_vertical"
             >
             <TextView
+                android:id="@+id/tv_username"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:hint="千山"
                 android:paddingStart="10dp"
                 android:layout_marginStart="@dimen/margin_left_10"
                 android:layout_marginEnd="@dimen/margin_right_10"
