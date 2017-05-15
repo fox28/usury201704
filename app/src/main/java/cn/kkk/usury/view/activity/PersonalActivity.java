@@ -55,4 +55,9 @@ public class PersonalActivity extends AppCompatActivity {
     public void onUpdate(View view) {
         MFGT.gotUpdate(PersonalActivity.this);
     }
+
+    public void onQuit(View view) {
+        SharePreferenceUtils.getInstance().removeUserInfo();
+        finish();
+    }
 }

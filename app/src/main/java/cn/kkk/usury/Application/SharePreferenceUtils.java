@@ -4,6 +4,8 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import cn.kkk.usury.utils.L;
+
 
 /**
  * Created by apple on 2017/4/6.
@@ -13,6 +15,7 @@ import android.content.SharedPreferences;
  * 一般在LoginActivity的loginSuccess()中调用
  */
 public class SharePreferenceUtils {
+    private static final String TAG = "SharePreferenceUtils";
     // sharePreference的文件名, 该文件用于保存username、username可以用于从database读取数据
     private static final String SHARE_PREFERENCE_NAME = "cn.kkk.usury_save_userInfo";
     // 保存数据的字段
@@ -85,7 +88,9 @@ public class SharePreferenceUtils {
     }
 
     // 用户退出登录后、清空数据
-    public void removeUsername() {
+    public void removeUserInfo() {
         editor.remove(TELEPHONE).commit();
+        editor.remove(NAME).commit();
+        L.e(TAG, "removeUserInfo, 执行结果， telephone = "+getTelephone()+", name = "+getName());
     }
 }

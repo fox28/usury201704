@@ -30,8 +30,8 @@ public class PersonalCenterFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_personal_center,null);
-        initData();
         initView(view);
+        initData();
         return view;
     }
 
@@ -39,12 +39,19 @@ public class PersonalCenterFragment extends Fragment {
         SharePreferenceUtils.init(getContext());
         telephone   = SharePreferenceUtils.getInstance().getTelephone();
         name        = SharePreferenceUtils.getInstance().getName();
+
+        showUserInfo();
     }
+
+    private void showUserInfo() {
+        mTvUserName.setText((name==null?(telephone==null?getString(R.string.username_default):telephone):name));
+    }
+
     private void initView(View view) {
         mNameLayout = (RelativeLayout) view.findViewById(R.id.center_user_info);
         mInfolLayout = (LinearLayout) view.findViewById(R.id.layout_personal_info);
         mTvUserName = (TextView) view.findViewById(R.id.tv_user_name);
-        mTvUserName.setText((name==null?(telephone==null?getString(R.string.username_default):telephone):name));
+
     }
 
     @Override
@@ -97,7 +104,5 @@ public class PersonalCenterFragment extends Fragment {
         });
 
     }
-
-
 
 }
