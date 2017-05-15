@@ -99,6 +99,9 @@ public class LoginPasswordFragment extends Fragment {
                             .addHeader("Authorization", "Bearer "+access_token)
                             .post(requestBody)
                             .build();
+                    L.e(TAG, I.LoginByPassword.TELEPHONE+" = "+telephone+",\n"
+                            +I.LoginByPassword.PASSWORD+" = "+password+",\n"
+                            +access_token+"\n");
                     Call call = new OkHttpClient().newCall(request);
                     call.enqueue(new Callback() {
                         @Override
@@ -110,7 +113,6 @@ public class LoginPasswordFragment extends Fragment {
                         public void onResponse(Call call, Response response) throws IOException {
                             String json = response.body().string();
                             L.e(TAG, "setOnClickLoginByPassword, json = "+json);
-                            L.e(TAG, "登录password = "+password+", telephone = "+telephone);
                             try {
                                 JSONObject jsonObject = new JSONObject(json);
                                 if (jsonObject.getString("errmsg").equals("success")) {
@@ -119,6 +121,7 @@ public class LoginPasswordFragment extends Fragment {
                                     // 使用SharePreferenceUtils给SharePreference的属性赋值
                                     SharePreferenceUtils.init(getContext());
                                     SharePreferenceUtils.getInstance().setId(user.getId());
+                                    SharePreferenceUtils.getInstance().setName(user.getName());
                                     SharePreferenceUtils.getInstance().setTelephone(user.getTelephone());
                                     SharePreferenceUtils.getInstance().setAccessToken(user.getAccess_token());
                                     L.e(TAG, "setOnClickLoginByPassword, user = "+user);
