@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import cn.kkk.usury.Application.SharePreferenceUtils;
 import cn.kkk.usury.R;
+import cn.kkk.usury.utils.L;
 import cn.kkk.usury.utils.MFGT;
 
 /**
@@ -19,9 +20,10 @@ import cn.kkk.usury.utils.MFGT;
  */
 
 public class PersonalCenterFragment extends Fragment {
+    private static final String TAG = "PersonalCenterFragment";
 
     RelativeLayout mNameLayout;
-    LinearLayout mInfolLayout;
+    LinearLayout mInfoLayout;
     TextView mTvUserName;
     String name, telephone;
 
@@ -49,7 +51,7 @@ public class PersonalCenterFragment extends Fragment {
 
     private void initView(View view) {
         mNameLayout = (RelativeLayout) view.findViewById(R.id.center_user_info);
-        mInfolLayout = (LinearLayout) view.findViewById(R.id.layout_personal_info);
+        mInfoLayout = (LinearLayout) view.findViewById(R.id.layout_personal_info);
         mTvUserName = (TextView) view.findViewById(R.id.tv_user_name);
 
     }
@@ -89,17 +91,21 @@ public class PersonalCenterFragment extends Fragment {
             public void onClick(View v) {
                 if (telephone==null) {
                     MFGT.gotoLogin(getActivity());
+                    return;
                 }
                 MFGT.gotoPersonalActivity(getActivity());
             }
         });
-        mInfolLayout.setOnClickListener(new View.OnClickListener() {
+        mInfoLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (telephone==null) {
-                    MFGT.gotoLogin(getActivity());
-                }
-                MFGT.gotoPersonalActivity(getActivity());
+                MFGT.gotoLogin(getActivity());
+//                if (telephone==null) {
+//                    MFGT.gotoLogin(getActivity());
+//                    L.e(TAG, "setOnLoginListener, mInfoLayout");
+//                    return;
+//                }
+//                MFGT.gotoPersonalActivity(getActivity());
             }
         });
     }
@@ -108,6 +114,7 @@ public class PersonalCenterFragment extends Fragment {
     public void onResume() {
         super.onResume();
         initData();
+        L.e(TAG, "onResume, telephone = "+telephone+", name = "+name);
     }
 
 }

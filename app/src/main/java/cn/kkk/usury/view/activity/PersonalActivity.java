@@ -21,8 +21,8 @@ public class PersonalActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_personal);
-        initData();
         initView();
+        initData();
         setOnListener();
     }
 
@@ -30,6 +30,14 @@ public class PersonalActivity extends AppCompatActivity {
         SharePreferenceUtils.init(this);
         telephone = SharePreferenceUtils.getInstance().getTelephone();
         name = SharePreferenceUtils.getInstance().getName();
+
+        showUserInfo();
+    }
+
+    private void showUserInfo() {
+        mTvTitle.setText(getString(R.string.personal_info));
+        mTvTelephone.setText(telephone);
+        mTvUsername.setText(name);
     }
 
     private void setOnListener() {
@@ -46,10 +54,6 @@ public class PersonalActivity extends AppCompatActivity {
         mTvTitle = (TextView) findViewById(R.id.tv_title);
         mTvTelephone = (TextView) findViewById(R.id.tv_telephone);
         mTvUsername = (TextView) findViewById(R.id.tv_username);
-
-        mTvTitle.setText(getString(R.string.personal_info));
-        mTvTelephone.setText(telephone);
-        mTvUsername.setText(name);
     }
 
     public void onUpdate(View view) {
@@ -59,5 +63,11 @@ public class PersonalActivity extends AppCompatActivity {
     public void onQuit(View view) {
         SharePreferenceUtils.getInstance().removeUserInfo();
         finish();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        initData();
     }
 }
