@@ -44,7 +44,9 @@ public class SplashActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
         initData();
+        loginTemp();
     }
+
 
     private void initData() {
         mac_uuid = new DeviceUuidFactory(this).getDeviceUuid().toString();
@@ -52,10 +54,12 @@ public class SplashActivity extends Activity {
         mUser = new User();
     }
 
+
+
     @Override
     protected void onStart() {
         super.onStart();
-        loginTemp();
+
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -66,11 +70,12 @@ public class SplashActivity extends Activity {
 
     }
 
-//    private static String getDeviceId(Context context) {
-//        return android.provider.Settings.Secure.getString(
-//                context.getContentResolver(),
-//                android.provider.Settings.Secure.ANDROID_ID);
-//    }
+    private static String getDeviceId(Context context) {
+        return android.provider.Settings.Secure.getString(
+                context.getContentResolver(),
+                android.provider.Settings.Secure.ANDROID_ID);
+    }
+
 
     private void loginTemp() {
         // https://modelx.yuzhidushu.com/api/v1/user/temp/login
@@ -78,7 +83,10 @@ public class SplashActivity extends Activity {
         RequestBody requestBody = new FormBody.Builder()
                 .add(I.User.MAC_UUID, mac_uuid)
                 .build();
-        final Request request = new Request.Builder().url(I.REQUEST_USER_TEMPORARY_LOGIN).post(requestBody).build();
+        final Request request = new Request.Builder()
+                .url(I.REQUEST_USER_TEMPORARY_LOGIN)
+                .post(requestBody)
+                .build();
         Call call = new OkHttpClient().newCall(request);
         call.enqueue(new Callback() {
             @Override
