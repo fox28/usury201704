@@ -14,6 +14,7 @@ public interface I {
 	String REQUEST_USER_LOGIN						= 		"https://modelx.yuzhidushu.com/api/v1/user/login";
 	String REQUEST_USER_UPDATE						= 		"https://modelx.yuzhidushu.com/api/v1/user";
 	String REQUEST_USER_LOGIN_BY_PASSWORD			= 		"https://modelx.yuzhidushu.com/api/v1/user/login/password";
+	String REQUEST_HOMEPAGE							= 		"https://modelx.yuzhidushu.com/api/v1/homepage";
 
 
 	String UTF_8 = "utf-8";

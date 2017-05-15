@@ -11,8 +11,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
+import cn.kkk.usury.Application.I;
+import cn.kkk.usury.Application.SharePreferenceUtils;
 import cn.kkk.usury.R;
 import cn.kkk.usury.adapter.AdViewAdapter;
 import cn.kkk.usury.adapter.FastRecommendAdapter;
@@ -22,15 +25,23 @@ import cn.kkk.usury.adapter.SortPicAdapter;
 import cn.kkk.usury.adapter.SpecialOffersAdapter;
 import cn.kkk.usury.model.bean.AppBean;
 import cn.kkk.usury.model.dao.AppDao;
+import cn.kkk.usury.utils.L;
 import cn.kkk.usury.view.widget.AdView;
 import cn.kkk.usury.view.widget.FlowIndicator;
 import cn.kkk.usury.view.widget.SlideLoopView;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class HomeFragment extends Fragment {
+    private static final String TAG = "HomeFragment";
+
     RecyclerView mRV_SortPic, mRV_fastRecommend, mRV_fastStrategy, mRV_SpecialOffers, mRV_NewGoods;
     StaggeredGridLayoutManager manager;
     LinearLayoutManager linearManager;
@@ -49,6 +60,9 @@ public class HomeFragment extends Fragment {
     ArrayList<String> mNewList;
     AdView mAdView;
 
+    String access_token;
+    OkHttpClient mOkHttpClient;
+
     public HomeFragment() {
     }
 
@@ -58,6 +72,7 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home, container, false);
+        mOkHttpClient = new OkHttpClient();
         initView(view);
         return view;
     }
@@ -144,5 +159,40 @@ public class HomeFragment extends Fragment {
         mNewList.add("家居家装换新季， 满199减100");
         mNewList.add("带上相机去旅游，尼康低至477");
         mNewList.add("价格惊呆！电信千兆光纤上市");
+
+        initAccessToken();
+        initJsonByLogin();
+
+
     }
+
+    private void initJsonByLogin() {
+        // https://modelx.yuzhidushu.com/api/v1/homepage
+        // Headers Content-Type:application/json Authorization:Bearer access_token
+        Request request = new Request.Builder()
+                .url(I.REQUEST_HOMEPAGE)
+                .addHeader("Content-Type", "application/json")
+                .addHeader("Authorization", "Bearer "+access_token)
+                .build();
+        Call call = mOkHttpClient.newCall(request);
+        call.enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                String json = response.body().string();
+                L.e(TAG, "initJsonByLogin, json = "+json);
+            }
+        });
+    }
+
+    private void initAccessToken() {
+        SharePreferenceUtils.init(getContext());
+        access_token = SharePreferenceUtils.getInstance().getAccessToken();
+    }
+
+
 }
