@@ -38,7 +38,7 @@ import okhttp3.Response;
  */
 
 public class LoginIdentifyingCodeFragment extends Fragment {
-    private static final String TAG = "LoginIdentifyingCodeFra";
+    private static final String TAG = "LoginIdentifyingCodeFragment";
 
     EditText mEtPhone, mEtIdentifyingCode;
     TextView mTvSendCode;
@@ -68,7 +68,6 @@ public class LoginIdentifyingCodeFragment extends Fragment {
         mEtPhone = (EditText) view.findViewById(R.id.et_phone_num);
         mTvSendCode = (TextView) view.findViewById(R.id.tv_send_code);
         mBtnLogin = (Button) view.findViewById(R.id.btn_login);
-//        setButtonLoginEnabled(false);
     }
 
     @Override
@@ -109,7 +108,6 @@ public class LoginIdentifyingCodeFragment extends Fragment {
                 try {
                     JSONObject jsonObject = new JSONObject(json);
                     JSONObject tokenObject = jsonObject.getJSONObject("data").getJSONObject("temp_token");
-//                    L.e(TAG, "tokenObject = "+ tokenObject);
                     key = tokenObject.getString("key");
                     tickets = tokenObject.getInt("tickets");
                     L.e(TAG, "gitTicketsForCode, 返回值 ,key="+key+", tickets="+tickets);
@@ -124,11 +122,11 @@ public class LoginIdentifyingCodeFragment extends Fragment {
 
 
     private void setListener() {
-        setOnListenerSendCode();
+        setOnListenerForCode();
         setOnListenerLoginByIdentifyingCode();
     }
 
-    private void setOnListenerSendCode() {
+    private void setOnListenerForCode() {
         // POST：https://modelx.yuzhidushu.com/api/v1/user/sms
         // 参数 telephone key tickets
 
@@ -157,18 +155,11 @@ public class LoginIdentifyingCodeFragment extends Fragment {
                         @Override
                         public void onResponse(Call call, Response response) throws IOException {
                             String json = response.body().string();
-                            L.e(TAG, "setOnListenerSendCode, onResponse, json = "+json);
+                            L.e(TAG, "setOnListenerForCode, onResponse, json = "+json);
                             try {
                                 JSONObject jsonObject = new JSONObject(json);
                                 code = jsonObject.getJSONObject("data").getString("code");
-//                                L.e(TAG, "setOnListenerSendCode, 返回值， code = "+code);
                                 if (!code.isEmpty()) {
-//                                    getActivity().runOnUiThread(new Runnable() {
-//                                        @Override
-//                                        public void run() {
-//                                            setButtonLoginEnabled(true);
-//                                        }
-//                                    });
                                     btnIsEnabled = true;
                                 }
                             } catch (JSONException e) {
@@ -216,7 +207,6 @@ public class LoginIdentifyingCodeFragment extends Fragment {
                         public void onResponse(Call call, Response response) throws IOException {
                             String json = response.body().string();
 
-                            L.e(TAG, "setOnListenerLoginByIdentifyingCode, 发送参数："+ I.LoginByCode.TELEPHONE+", "+ I.LoginByCode.CODE+", "+ I.LoginByCode.USER_ID);
                             L.e(TAG, "setOnListenerLoginByIdentifyingCode, telephone ="+telephone+", id="+id+", code="+code);
                             L.e(TAG, "setOnListenerLoginByIdentifyingCode, onResponse, json = "+json);
                             try {
@@ -227,12 +217,6 @@ public class LoginIdentifyingCodeFragment extends Fragment {
                                     mUser = UserUtils.getUserFromJson(jsonObject);
                                     L.e(TAG, "mUser = " + mUser);
                                     btnIsEnabled = false;
-//                                    mBtnLogin.post(new Runnable() {
-//                                        @Override
-//                                        public void run() {
-//                                            setButtonLoginEnabled(false);
-//                                        }
-//                                    });
                                 }
 
                                 // 使用SharePreferenceUtils给SharePreference的属性赋值
@@ -295,7 +279,9 @@ public class LoginIdentifyingCodeFragment extends Fragment {
         return true;
     }
 
-    private void setButtonLoginEnabled(boolean enabled) {
-        mBtnLogin.setEnabled(enabled);
+    @Override
+    public void onResume() {
+        super.onResume();
+        gitTicketsForCode();
     }
 }
