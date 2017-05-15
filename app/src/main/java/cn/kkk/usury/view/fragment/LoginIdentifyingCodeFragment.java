@@ -86,7 +86,7 @@ public class LoginIdentifyingCodeFragment extends Fragment {
                 Context.MODE_PRIVATE);
         id = sp.getInt(I.SharePreference.ID, -1);
         access_token = sp.getString(I.SharePreference.ACCESS_TOKEN, null);
-        L.e(TAG, "iniUserInfo, id = "+id+", access_token = "+access_token);
+//        L.e(TAG, "iniUserInfo, id = "+id+", access_token = "+access_token);
 
 
         RequestBody requestBody = new FormBody.Builder()
