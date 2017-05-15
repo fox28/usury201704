@@ -66,11 +66,11 @@ public class SplashActivity extends Activity {
 
     }
 
-    private static String getDeviceId(Context context) {
-        return android.provider.Settings.Secure.getString(
-                context.getContentResolver(),
-                android.provider.Settings.Secure.ANDROID_ID);
-    }
+//    private static String getDeviceId(Context context) {
+//        return android.provider.Settings.Secure.getString(
+//                context.getContentResolver(),
+//                android.provider.Settings.Secure.ANDROID_ID);
+//    }
 
     private void loginTemp() {
         // https://modelx.yuzhidushu.com/api/v1/user/temp/login

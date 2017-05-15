@@ -51,6 +51,7 @@ public class LoginIdentifyingCodeFragment extends Fragment {
     String telephone;
     String access_token;
     String code;// user/login 用户登录需要的参数
+    OkHttpClient mOkHttpClient;
 
     boolean btnIsEnabled = false;
 
@@ -60,6 +61,7 @@ public class LoginIdentifyingCodeFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         View view = View.inflate(getContext(), R.layout.fragment_login_idencifying_code,null);
         initView(view);
+        mOkHttpClient = new OkHttpClient();
         return view;
     }
 
@@ -96,7 +98,7 @@ public class LoginIdentifyingCodeFragment extends Fragment {
                 .addHeader("Authorization", "Bearer "+access_token)
                 .post(requestBody)
                 .build();
-        Call call = new OkHttpClient().newCall(request);
+        Call call = mOkHttpClient.newCall(request);
         call.enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
@@ -145,7 +147,7 @@ public class LoginIdentifyingCodeFragment extends Fragment {
                             .addHeader("Authorization", "Bearer "+access_token)
                             .post(requestBody)
                             .build();
-                    Call call = new  OkHttpClient().newCall(request);
+                    Call call = mOkHttpClient.newCall(request);
                     call.enqueue(new Callback() {
                         @Override
                         public void onFailure(Call call, IOException e) {
@@ -154,6 +156,12 @@ public class LoginIdentifyingCodeFragment extends Fragment {
 
                         @Override
                         public void onResponse(Call call, Response response) throws IOException {
+                            getActivity().runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast.makeText(getContext(), "验证码发送成功" , Toast.LENGTH_SHORT).show();
+                                }
+                            });
                             String json = response.body().string();
                             L.e(TAG, "setOnListenerForCode, onResponse, json = "+json);
                             try {
@@ -196,7 +204,7 @@ public class LoginIdentifyingCodeFragment extends Fragment {
                             .addHeader("Authorization", "Bearer "+access_token)
                             .post(requestBody)
                             .build();
-                    Call call = new OkHttpClient().newCall(request);
+                    Call call = mOkHttpClient.newCall(request);
                     call.enqueue(new Callback() {
                         @Override
                         public void onFailure(Call call, IOException e) {

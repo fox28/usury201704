@@ -98,7 +98,6 @@ public class UpdateActivity extends AppCompatActivity {
                     try {
                         JSONObject jsonObject = new JSONObject(json);
                         L.e(TAG, "onUpdateSave, jsonObject = "+jsonObject);
-                        L.e(TAG, "jsonObject.getString(\"errmsg\") ="+jsonObject.getString("errmsg"));
                         if (jsonObject.getString("errmsg").equals("success")) {
 
 //                            User user = UserUtils.getUserFromJson(jsonObject);
