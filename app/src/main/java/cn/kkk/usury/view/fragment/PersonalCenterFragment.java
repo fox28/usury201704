@@ -102,7 +102,12 @@ public class PersonalCenterFragment extends Fragment {
                 MFGT.gotoPersonalActivity(getActivity());
             }
         });
+    }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        initData();
     }
 
 }
