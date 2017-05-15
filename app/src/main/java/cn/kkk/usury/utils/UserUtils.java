@@ -1,8 +1,11 @@
 package cn.kkk.usury.utils;
 
+import android.content.Context;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import cn.kkk.usury.Application.SharePreferenceUtils;
 import cn.kkk.usury.model.bean.User;
 
 /**
@@ -12,10 +15,12 @@ import cn.kkk.usury.model.bean.User;
 public class UserUtils {
     static User mUser = new User();
 
+
     public static User getUserFromJson(JSONObject jsonObject) {
         JSONObject userObject = null;
         try {
             userObject = jsonObject.getJSONObject("data").getJSONObject("user");
+
             mUser.setId(userObject.getInt("id"));
             mUser.setName(userObject.getString("name"));
             mUser.setTelephone(userObject.getString("telephone"));
@@ -29,5 +34,20 @@ public class UserUtils {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public static void setUserToSharePreference(User user, Context context) {
+        SharePreferenceUtils.init(context);
+        SharePreferenceUtils.getInstance().setId(user.getId());
+        if (user.getName() != null) {
+            SharePreferenceUtils.getInstance().setName(user.getName());
+        }
+        if (user.getTelephone() != null) {
+            SharePreferenceUtils.getInstance().setTelephone(user.getTelephone());
+        }
+        if (user.getAccess_token() != null) {
+            SharePreferenceUtils.getInstance().setAccessToken(user.getAccess_token());
+        }
+
     }
 }

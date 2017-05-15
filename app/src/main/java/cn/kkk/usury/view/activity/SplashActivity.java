@@ -89,6 +89,7 @@ public class SplashActivity extends Activity {
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 String json = response.body().string();
+                L.e(TAG,"json = " +json);
                 try {
                     JSONObject jsonObject = new JSONObject(json);
                     L.e(TAG, "jsonObject = "+jsonObject);
@@ -106,7 +107,7 @@ public class SplashActivity extends Activity {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                L.e(TAG,"json = " +json);
+
 
 
             }

@@ -110,6 +110,7 @@ public class LoginPasswordFragment extends Fragment {
                         public void onResponse(Call call, Response response) throws IOException {
                             String json = response.body().string();
                             L.e(TAG, "setOnClickLoginByPassword, json = "+json);
+                            L.e(TAG, "登录password = "+password+", telephone = "+telephone);
                             try {
                                 JSONObject jsonObject = new JSONObject(json);
                                 if (jsonObject.getString("errmsg").equals("success")) {
