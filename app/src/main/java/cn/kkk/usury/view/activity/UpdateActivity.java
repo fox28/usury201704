@@ -106,7 +106,7 @@ public class UpdateActivity extends AppCompatActivity {
                             user.setId(userObject.getInt("id"));
                             user.setName(userObject.getString("name"));
                             user.setTelephone(userObject.getString("telephone"));
-                            L.e(TAG, "onUpdateSave, getUserFromJson, user ="+user);
+//                            L.e(TAG, "onUpdateSave, getUserFromJson, user ="+user);
 
 //                            UserUtils.setUserToSharePreference(user, UpdateActivity.this);
                             // 使用SharePreferenceUtils给SharePreference的属性赋值
@@ -119,8 +119,8 @@ public class UpdateActivity extends AppCompatActivity {
                             }
 
 
-                            L.e(TAG, "update 修改后的结果, telephone = "+SharePreferenceUtils.getInstance().getTelephone()+
-                                    ", name = "+SharePreferenceUtils.getInstance().getName());
+//                            L.e(TAG, "update 修改后的结果, telephone = "+SharePreferenceUtils.getInstance().getTelephone()+
+//                                    ", name = "+SharePreferenceUtils.getInstance().getName());
 
                         }
                     } catch (JSONException e) {

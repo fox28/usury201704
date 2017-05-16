@@ -100,7 +100,6 @@ public class SplashActivity extends Activity {
                 L.e(TAG,"json = " +json);
                 try {
                     JSONObject jsonObject = new JSONObject(json);
-                    L.e(TAG, "jsonObject = "+jsonObject);
                     if (jsonObject.getString("errmsg").equals("success")) {
                         User user = UserUtils.getUserFromJson(jsonObject);
                         SharePreferenceUtils.init(SplashActivity.this);

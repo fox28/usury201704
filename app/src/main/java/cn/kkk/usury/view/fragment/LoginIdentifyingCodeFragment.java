@@ -124,11 +124,11 @@ public class LoginIdentifyingCodeFragment extends Fragment {
 
 
     private void setListener() {
-        setOnListenerForCode();
+        setOnListenerSendingCode();
         setOnListenerLoginByIdentifyingCode();
     }
 
-    private void setOnListenerForCode() {
+    private void setOnListenerSendingCode() {
         // POST：https://modelx.yuzhidushu.com/api/v1/user/sms
         // 参数 telephone key tickets
 
@@ -163,7 +163,7 @@ public class LoginIdentifyingCodeFragment extends Fragment {
                                 }
                             });
                             String json = response.body().string();
-                            L.e(TAG, "setOnListenerForCode, onResponse, json = "+json);
+                            L.e(TAG, "setOnListenerSendingCode, onResponse, json = "+json);
                             try {
                                 JSONObject jsonObject = new JSONObject(json);
                                 code = jsonObject.getJSONObject("data").getString("code");
@@ -215,7 +215,7 @@ public class LoginIdentifyingCodeFragment extends Fragment {
                         public void onResponse(Call call, Response response) throws IOException {
                             String json = response.body().string();
 
-                            L.e(TAG, "setOnListenerLoginByIdentifyingCode, telephone ="+telephone+", id="+id+", code="+code);
+//                            L.e(TAG, "setOnListenerLoginByIdentifyingCode, telephone ="+telephone+", id="+id+", code="+code);
                             L.e(TAG, "setOnListenerLoginByIdentifyingCode, onResponse, json = "+json);
                             try {
                                 JSONObject jsonObject = new JSONObject(json);
@@ -223,7 +223,7 @@ public class LoginIdentifyingCodeFragment extends Fragment {
 
                                     // 使用UserUtils获得mUser
                                     mUser = UserUtils.getUserFromJson(jsonObject);
-                                    L.e(TAG, "mUser = " + mUser);
+//                                    L.e(TAG, "mUser = " + mUser);
                                     btnIsEnabled = false;
                                 }
 

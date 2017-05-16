@@ -99,9 +99,9 @@ public class LoginPasswordFragment extends Fragment {
                             .addHeader("Authorization", "Bearer "+access_token)
                             .post(requestBody)
                             .build();
-                    L.e(TAG, I.LoginByPassword.TELEPHONE+" = "+telephone+",\n"
+                    /*L.e(TAG, I.LoginByPassword.TELEPHONE+" = "+telephone+",\n"
                             +I.LoginByPassword.PASSWORD+" = "+password+",\n"
-                            +access_token+"\n");
+                            +access_token+"\n");*/
                     Call call = new OkHttpClient().newCall(request);
                     call.enqueue(new Callback() {
                         @Override
@@ -142,14 +142,14 @@ public class LoginPasswordFragment extends Fragment {
         mTvRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                L.e(TAG, "setOnClickToRegister, mTvRegister");
+//                L.e(TAG, "setOnClickToRegister, mTvRegister");
                 setBroadcastToRegister();
             }
         });
         mTvPasswordLost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                L.e(TAG, "setOnClickToRegister, mTvPasswordLost");
+//                L.e(TAG, "setOnClickToRegister, mTvPasswordLost");
                 setBroadcastToRegister();
             }
         });
@@ -160,7 +160,7 @@ public class LoginPasswordFragment extends Fragment {
         Intent intent = new Intent("set-fragment-identifying-code");
         intent.putExtra("index",0);
         getContext().sendBroadcast(intent);
-        L.e(TAG, "setBroadcastToRegister");
+//        L.e(TAG, "setBroadcastToRegister");
     }
 
 
