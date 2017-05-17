@@ -25,4 +25,5 @@
     <string name="save">保存</string>
     <string name="personal_info">个人信息</string>
     <string name="data_is_empty">显示数据为空</string>
+    <string name="now_refresh">更新中…</string>
 </resources>

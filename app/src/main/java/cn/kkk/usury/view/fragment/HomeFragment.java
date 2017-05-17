@@ -7,9 +7,14 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.transition.Slide;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -24,6 +29,7 @@ import cn.kkk.usury.adapter.NewGoodsAdapter;
 import cn.kkk.usury.adapter.SortPicAdapter;
 import cn.kkk.usury.adapter.SpecialOffersAdapter;
 import cn.kkk.usury.model.bean.AppBean;
+import cn.kkk.usury.model.bean.SlideBean;
 import cn.kkk.usury.model.dao.AppDao;
 import cn.kkk.usury.utils.L;
 import cn.kkk.usury.view.widget.AdView;
@@ -62,6 +68,9 @@ public class HomeFragment extends Fragment {
 
     String access_token;
     OkHttpClient mOkHttpClient;
+
+    // 图片轮播数据
+    ArrayList<SlideBean> mSlideBeenList;
 
     public HomeFragment() {
     }
@@ -160,6 +169,8 @@ public class HomeFragment extends Fragment {
         mNewList.add("带上相机去旅游，尼康低至477");
         mNewList.add("价格惊呆！电信千兆光纤上市");
 
+        mSlideBeenList = new ArrayList<>();
+
         initAccessToken();
         initJsonByLogin();
 
@@ -185,6 +196,31 @@ public class HomeFragment extends Fragment {
             public void onResponse(Call call, Response response) throws IOException {
                 String json = response.body().string();
                 L.e(TAG, "initJsonByLogin, json = "+json);
+                // 获得轮播数据
+                try {
+                    JSONObject jsonObject = new JSONObject(json);
+                    if (jsonObject.getString("errmsg").equals("success")) {
+                        JSONArray slideJSArray = jsonObject.getJSONObject("data").getJSONObject("home_page").getJSONArray("slides");
+                        L.e(TAG, "slideJSArray = "+slideJSArray);
+                        ArrayList<String> urls = new ArrayList<String>();
+                        for (int i=0;i<slideJSArray.length();i++) {
+                            urls.add(slideJSArray.getJSONObject(i).getString("slide_img_url"));
+                            SlideBean bean = new SlideBean();
+                            bean.setId(slideJSArray.getJSONObject(i).getInt("slide_id"));
+                            bean.setUrl(slideJSArray.getJSONObject(i).getString("slide_img_url"));
+                            bean.setDesc(slideJSArray.getJSONObject(i).getString("slide_desc"));
+                            mSlideBeenList.add(bean);
+                        }
+                        L.e(TAG, "urls = " + urls);
+//                        mSlideList = urls;
+//                        L.e(TAG, "mSlideList = "+mSlideList);
+                        L.e(TAG, "mSlideBeanList = "+mSlideBeenList);
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
             }
         });
     }
@@ -194,5 +230,9 @@ public class HomeFragment extends Fragment {
         access_token = SharePreferenceUtils.getInstance().getAccessToken();
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
 
+    }
 }
